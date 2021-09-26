@@ -10,6 +10,14 @@
 /[Ll]ogs/
 /[Mm]emoryCaptures/
 
+/TwitchTest/[Ll]ibrary/
+/TwitchTest/[Tt]emp/
+/TwitchTest/[Oo]bj/
+/TwitchTest/[Bb]uild/
+/TwitchTest/[Bb]uilds/
+/TwitchTest/[Ll]ogs/
+/TwitchTest/[Mm]emoryCaptures/
+
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
 
