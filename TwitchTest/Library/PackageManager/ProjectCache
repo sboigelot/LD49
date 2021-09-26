@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637681149280525499
-    m_Hash: 2053551833
+      ticks: 637682612161330113
+    m_Hash: 3370169391
   m_LockFileStatus:
     m_FilePath: D:/git/LudumDare/LD49/TwitchTest/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637681149520968784
-    m_Hash: 2154220959
+      ticks: 637682612161884918
+    m_Hash: 2208753255
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
@@ -77,6 +77,8 @@ m_PackageAssets:
         - 3.2.5
         - 3.2.6
         - 3.2.9
+        - 3.2.10
+        - 3.2.11
         - 4.0.0
         - 4.0.1
         - 4.1.0
@@ -104,6 +106,7 @@ m_PackageAssets:
         - 6.0.5
         - 7.0.0-pre.2
         - 7.0.0-pre.3
+        - 7.0.0
         compatible:
         - 5.0.4
         - 5.0.5
@@ -300,6 +303,7 @@ m_PackageAssets:
         - 6.0.0-pre.2
         - 6.0.0-pre.3
         - 6.0.0-pre.4
+        - 6.0.0
         compatible:
         - 4.0.2
         verified: 4.0.2
@@ -459,6 +463,7 @@ m_PackageAssets:
         - 3.0.14
         - 3.0.15
         - 3.0.16
+        - 3.0.17
         - 4.0.0
         - 4.0.1
         - 4.0.2
@@ -483,6 +488,7 @@ m_PackageAssets:
         - 6.0.1
         - 7.0.0-pre.2
         - 7.0.0-pre.3
+        - 7.0.0
         compatible:
         - 5.1.1
         - 5.1.2
@@ -641,6 +647,8 @@ m_PackageAssets:
         - 1.7.1
         - 1.8.0
         - 1.9.0
+        - 1.10.2
+        - 1.11.2
         - 2.0.0-preview.6
         - 2.0.0-preview.8
         - 2.0.0-preview.15
@@ -657,6 +665,7 @@ m_PackageAssets:
         - 1.5.7
         - 1.6.0
         - 1.8.0
+        - 1.10.2
         - 2.0.0-preview.6
         - 2.0.0-preview.8
         - 2.0.0-preview.15
@@ -808,12 +817,12 @@ m_PackageAssets:
         url: https://github.cds.internal.unity3d.com/unity/com.unity.ide.rider.git
         revision: abb44f053e9a41d2e00e149e32a19bcec76e98b4
         path: 
-    - packageId: com.unity.ide.visualstudio@2.0.7
+    - packageId: com.unity.ide.visualstudio@2.0.11
       testable: 0
       isDirectDependency: 1
-      version: 2.0.7
+      version: 2.0.11
       source: 1
-      resolvedPath: D:\git\LudumDare\LD49\TwitchTest\Library\PackageCache\com.unity.ide.visualstudio@2.0.7
+      resolvedPath: D:\git\LudumDare\LD49\TwitchTest\Library\PackageCache\com.unity.ide.visualstudio@2.0.11
       assetPath: Packages/com.unity.ide.visualstudio
       name: com.unity.ide.visualstudio
       displayName: Visual Studio Editor
@@ -887,13 +896,13 @@ m_PackageAssets:
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
-      datePublishedTicks: 637486638490000000
+      datePublishedTicks: 637613656180000000
       documentationUrl: 
       hasRepository: 1
       repository:
         type: git
         url: https://github.cds.internal.unity3d.com/unity/com.unity.ide.visualstudio.git
-        revision: dec282022c7a95fada560c36f53da9dd155a142c
+        revision: 680e06d94ffca728223ae2cb14bb919cd354e2c1
         path: 
     - packageId: com.unity.ide.vscode@1.2.3
       testable: 0
@@ -928,6 +937,7 @@ m_PackageAssets:
         - 1.2.1
         - 1.2.2
         - 1.2.3
+        - 1.2.4
         compatible:
         - 1.0.2
         - 1.0.3
@@ -940,7 +950,8 @@ m_PackageAssets:
         - 1.2.1
         - 1.2.2
         - 1.2.3
-        verified: 1.2.3
+        - 1.2.4
+        verified: 1.2.4
       dependencies: []
       resolvedDependencies: []
       keywords: []
@@ -1014,11 +1025,13 @@ m_PackageAssets:
         - 1.1.24
         - 1.1.26
         - 1.1.27
+        - 1.1.29
         compatible:
         - 1.1.24
         - 1.1.26
         - 1.1.27
-        verified: 1.1.27
+        - 1.1.29
+        verified: 1.1.29
       dependencies:
       - name: com.unity.ext.nunit
         version: 1.0.6
@@ -1134,6 +1147,7 @@ m_PackageAssets:
         - 1.5.4
         - 1.5.5
         - 1.5.6
+        - 1.6.0-preview.1
         - 2.0.0
         - 2.0.1-preview.1
         - 2.0.1
@@ -1155,6 +1169,7 @@ m_PackageAssets:
         - 2.1.4
         - 2.1.5
         - 2.1.6
+        - 2.2.0-preview.1
         - 3.0.0-preview.1
         - 3.0.0-preview.3
         - 3.0.0-preview.4
@@ -1172,12 +1187,14 @@ m_PackageAssets:
         - 3.0.4
         - 3.0.5
         - 3.0.6
+        - 3.2.0-pre.1
         compatible:
         - 3.0.1
         - 3.0.3
         - 3.0.4
         - 3.0.5
         - 3.0.6
+        - 3.2.0-pre.1
         verified: 3.0.6
       dependencies:
       - name: com.unity.ugui
@@ -1300,6 +1317,7 @@ m_PackageAssets:
         - 1.6.0-pre.4
         - 1.6.0-pre.5
         - 1.6.1
+        - 1.6.2
         compatible:
         - 1.4.7
         - 1.4.8
@@ -1321,6 +1339,7 @@ m_PackageAssets:
         - 1.6.0-pre.4
         - 1.6.0-pre.5
         - 1.6.1
+        - 1.6.2
         verified: 1.4.8
       dependencies:
       - name: com.unity.modules.director
@@ -3350,6 +3369,7 @@ m_PackageAssets:
         - 6.0.0-pre.2
         - 6.0.0-pre.3
         - 6.0.0-pre.4
+        - 6.0.0
         compatible:
         - 4.0.2
         - 4.0.3
@@ -3424,6 +3444,7 @@ m_PackageAssets:
         - 2.0.5
         - 2.0.6
         - 2.1.0
+        - 2.1.1
         - 3.0.0
         - 3.0.1
         - 3.0.2
@@ -3433,6 +3454,7 @@ m_PackageAssets:
         - 5.0.0-pre.1
         - 5.0.0-pre.2
         - 5.0.0
+        - 5.0.1
         compatible:
         - 4.0.1
         - 4.0.2
