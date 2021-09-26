@@ -58,3 +58,5 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+/TwitchTest/Assets/Secret.cs
+/TwitchTest/Assets/Secret.cs.meta
