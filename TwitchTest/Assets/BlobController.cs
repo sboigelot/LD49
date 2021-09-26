@@ -15,7 +15,7 @@ public class BlobController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Alpha3))
+        if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             animator.SetTrigger("WakeUp");
         }

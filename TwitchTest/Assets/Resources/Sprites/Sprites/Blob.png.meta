@@ -250,8 +250,8 @@ TextureImporter:
       name: Blob 6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 256
+        x: 256
+        y: 128
         width: 128
         height: 128
       alignment: 7
@@ -271,7 +271,7 @@ TextureImporter:
       name: Blob 7
       rect:
         serializedVersion: 2
-        x: 256
+        x: 384
         y: 128
         width: 128
         height: 128
@@ -292,8 +292,8 @@ TextureImporter:
       name: Blob 8
       rect:
         serializedVersion: 2
-        x: 384
-        y: 128
+        x: 0
+        y: 0
         width: 128
         height: 128
       alignment: 7
@@ -313,7 +313,7 @@ TextureImporter:
       name: Blob 9
       rect:
         serializedVersion: 2
-        x: 0
+        x: 128
         y: 0
         width: 128
         height: 128
@@ -334,7 +334,7 @@ TextureImporter:
       name: Blob 10
       rect:
         serializedVersion: 2
-        x: 128
+        x: 256
         y: 0
         width: 128
         height: 128
@@ -355,7 +355,7 @@ TextureImporter:
       name: Blob 11
       rect:
         serializedVersion: 2
-        x: 128
+        x: 256
         y: 0
         width: 128
         height: 128
@@ -376,7 +376,7 @@ TextureImporter:
       name: Blob 12
       rect:
         serializedVersion: 2
-        x: 128
+        x: 256
         y: 0
         width: 128
         height: 128
@@ -397,7 +397,7 @@ TextureImporter:
       name: Blob 13
       rect:
         serializedVersion: 2
-        x: 128
+        x: 256
         y: 0
         width: 128
         height: 128
