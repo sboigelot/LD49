@@ -13,13 +13,12 @@ public class CrateSpawner : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Keypad5))
         {
             SpawnCrate();
-        }
-        
+        }        
     }
 
 	private void SpawnCrate()
 	{
         var newCrate = Instantiate(CratePrefab, transform, false);
-
+        FindObjectOfType<MageController>().SelectedCrate = newCrate.GetComponent<Rigidbody2D>();
 	}
 }
