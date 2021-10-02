@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animationNamesThatDoNotLoop:
   - death
+  - Disappear
+  - Appear
   _automaticImporting: 0
   _spritePixelsPerUnit: 100
   _targetObjectType: 0

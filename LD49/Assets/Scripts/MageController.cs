@@ -131,7 +131,16 @@ public class MageController : MonoBehaviour
 
 			if (VortexCenter != null)
 			{
-				VortexCenter.gameObject.SetActive(SelectedSpell == Spells.Vortex);
+				VortexCenter.gameObject.SetActive(SelectedSpell == Spells.Vortex); //Coroutine set false after end of anim
+
+				if (SelectedSpell == Spells.Vortex)
+				{
+					VortexCenter.GetComponent<Animator>().Play("Appear");
+				}
+				else
+				{
+					VortexCenter.GetComponent<Animator>().Play("Disappear");
+				}
 			}
 		}
 	}

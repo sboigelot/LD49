@@ -1,0 +1,480 @@
+fileFormatVersion: 2
+guid: 831ff706cc8e6b149a4ad30c7c75261d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6974998258513485810
+    second: SteamLoco2 0
+  - first:
+      213: -5669172599904161549
+    second: SteamLoco2 1
+  - first:
+      213: 935000734975566755
+    second: SteamLoco2 2
+  - first:
+      213: 5714391582248159093
+    second: SteamLoco2 3
+  - first:
+      213: 7224315836705421278
+    second: SteamLoco2 4
+  - first:
+      213: -7070498743082835326
+    second: SteamLoco2 5
+  - first:
+      213: 3358494277112489258
+    second: SteamLoco2 6
+  - first:
+      213: -1548910368523351653
+    second: SteamLoco2 7
+  - first:
+      213: 3605949620571934487
+    second: SteamLoco2 8
+  - first:
+      213: 3019439587377827177
+    second: SteamLoco2 9
+  - first:
+      213: -3317198246152074440
+    second: SteamLoco2 10
+  - first:
+      213: -7444590935151137432
+    second: SteamLoco2 11
+  - first:
+      213: 2318255543658893606
+    second: SteamLoco2 12
+  - first:
+      213: 5643569521336140547
+    second: SteamLoco2 13
+  - first:
+      213: -2596851280776832466
+    second: SteamLoco2 14
+  - first:
+      213: 1936260542912228415
+    second: SteamLoco2 15
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 3004
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SteamLoco2 0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1659
+        width: 751
+        height: 553
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e00e55cf904d33f90800000000000000
+      internalID: -6974998258513485810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamLoco2 1
+      rect:
+        serializedVersion: 2
+        x: 751
+        y: 1659
+        width: 751
+        height: 553
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f0b5549e8d0351b0800000000000000
+      internalID: -5669172599904161549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamLoco2 2
+      rect:
+        serializedVersion: 2
+        x: 1502
+        y: 1659
+        width: 751
+        height: 553
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a3a2f0f63ac9fc00800000000000000
+      internalID: 935000734975566755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamLoco2 3
+      rect:
+        serializedVersion: 2
+        x: 2253
+        y: 1659
+        width: 751
+        height: 553
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 577426f2ed89d4f40800000000000000
+      internalID: 5714391582248159093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamLoco2 4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1106
+        width: 751
+        height: 553
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed73e083afce14460800000000000000
+      internalID: 7224315836705421278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamLoco2 5
+      rect:
+        serializedVersion: 2
+        x: 751
+        y: 1106
+        width: 751
+        height: 553
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 282a3b1bada80ed90800000000000000
+      internalID: -7070498743082835326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamLoco2 6
+      rect:
+        serializedVersion: 2
+        x: 1502
+        y: 1106
+        width: 751
+        height: 553
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a25e87f30c4cb9e20800000000000000
+      internalID: 3358494277112489258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamLoco2 7
+      rect:
+        serializedVersion: 2
+        x: 2253
+        y: 1106
+        width: 751
+        height: 553
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b990f3fe93a218ae0800000000000000
+      internalID: -1548910368523351653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamLoco2 8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 553
+        width: 751
+        height: 553
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71f05242318ea0230800000000000000
+      internalID: 3605949620571934487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamLoco2 9
+      rect:
+        serializedVersion: 2
+        x: 751
+        y: 553
+        width: 751
+        height: 553
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96d486a9e4437e920800000000000000
+      internalID: 3019439587377827177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamLoco2 10
+      rect:
+        serializedVersion: 2
+        x: 1502
+        y: 553
+        width: 751
+        height: 553
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83b8e8835c1f6f1d0800000000000000
+      internalID: -3317198246152074440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamLoco2 11
+      rect:
+        serializedVersion: 2
+        x: 2253
+        y: 553
+        width: 751
+        height: 553
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86d2934dcff7fa890800000000000000
+      internalID: -7444590935151137432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamLoco2 12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 751
+        height: 553
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6215e5262291c2020800000000000000
+      internalID: 2318255543658893606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamLoco2 13
+      rect:
+        serializedVersion: 2
+        x: 751
+        y: 0
+        width: 751
+        height: 553
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3034678249cf15e40800000000000000
+      internalID: 5643569521336140547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamLoco2 14
+      rect:
+        serializedVersion: 2
+        x: 1502
+        y: 0
+        width: 751
+        height: 553
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2a57c2d48126fbd0800000000000000
+      internalID: -2596851280776832466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SteamLoco2 15
+      rect:
+        serializedVersion: 2
+        x: 2253
+        y: 0
+        width: 751
+        height: 553
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3c63ec74bafeda10800000000000000
+      internalID: 1936260542912228415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

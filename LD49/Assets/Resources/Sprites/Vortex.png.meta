@@ -86,6 +86,39 @@ TextureImporter:
   - first:
       213: -1257058218518254218
     second: Vortex 27
+  - first:
+      213: 7574449927645606105
+    second: Vortex 28
+  - first:
+      213: 8281882210090541931
+    second: Vortex 29
+  - first:
+      213: 4255065436150568849
+    second: Vortex 30
+  - first:
+      213: -5375880614927859309
+    second: Vortex 31
+  - first:
+      213: -1600820353627283380
+    second: Vortex 32
+  - first:
+      213: 8758473997509910325
+    second: Vortex 33
+  - first:
+      213: -4180919004271714242
+    second: Vortex 34
+  - first:
+      213: 6803864557424509999
+    second: Vortex 35
+  - first:
+      213: 3156908706226830349
+    second: Vortex 36
+  - first:
+      213: -3633970487417947183
+    second: Vortex 37
+  - first:
+      213: 678382473635204456
+    second: Vortex 38
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -167,7 +200,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1536
+        y: 1920
         width: 384
         height: 384
       alignment: 0
@@ -188,7 +221,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 384
-        y: 1536
+        y: 1920
         width: 384
         height: 384
       alignment: 0
@@ -209,7 +242,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 768
-        y: 1536
+        y: 1920
         width: 384
         height: 384
       alignment: 0
@@ -230,7 +263,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1152
-        y: 1536
+        y: 1920
         width: 384
         height: 384
       alignment: 0
@@ -251,7 +284,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1536
-        y: 1536
+        y: 1920
         width: 384
         height: 384
       alignment: 0
@@ -272,7 +305,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1920
-        y: 1536
+        y: 1920
         width: 384
         height: 384
       alignment: 0
@@ -293,7 +326,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1152
+        y: 1536
         width: 384
         height: 384
       alignment: 0
@@ -314,7 +347,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 384
-        y: 1152
+        y: 1536
         width: 384
         height: 384
       alignment: 0
@@ -335,7 +368,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 768
-        y: 1152
+        y: 1536
         width: 384
         height: 384
       alignment: 0
@@ -356,7 +389,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1152
-        y: 1152
+        y: 1536
         width: 384
         height: 384
       alignment: 0
@@ -377,7 +410,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1536
-        y: 1152
+        y: 1536
         width: 384
         height: 384
       alignment: 0
@@ -398,7 +431,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1920
-        y: 1152
+        y: 1536
         width: 384
         height: 384
       alignment: 0
@@ -419,7 +452,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 768
+        y: 1152
         width: 384
         height: 384
       alignment: 0
@@ -440,7 +473,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 384
-        y: 768
+        y: 1152
         width: 384
         height: 384
       alignment: 0
@@ -461,7 +494,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 768
-        y: 768
+        y: 1152
         width: 384
         height: 384
       alignment: 0
@@ -482,7 +515,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1152
-        y: 768
+        y: 1152
         width: 384
         height: 384
       alignment: 0
@@ -503,7 +536,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1536
-        y: 768
+        y: 1152
         width: 384
         height: 384
       alignment: 0
@@ -524,7 +557,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1920
-        y: 768
+        y: 1152
         width: 384
         height: 384
       alignment: 0
@@ -545,7 +578,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 384
+        y: 768
         width: 384
         height: 384
       alignment: 0
@@ -566,7 +599,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 384
-        y: 384
+        y: 768
         width: 384
         height: 384
       alignment: 0
@@ -587,7 +620,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 768
-        y: 384
+        y: 768
         width: 384
         height: 384
       alignment: 0
@@ -608,7 +641,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1152
-        y: 384
+        y: 768
         width: 384
         height: 384
       alignment: 0
@@ -629,7 +662,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1536
-        y: 384
+        y: 768
         width: 384
         height: 384
       alignment: 0
@@ -650,7 +683,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1920
-        y: 384
+        y: 768
         width: 384
         height: 384
       alignment: 0
@@ -671,7 +704,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 384
         width: 384
         height: 384
       alignment: 0
@@ -692,7 +725,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 384
-        y: 0
+        y: 384
         width: 384
         height: 384
       alignment: 0
@@ -713,7 +746,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 768
-        y: 0
+        y: 384
         width: 384
         height: 384
       alignment: 0
@@ -734,7 +767,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1152
-        y: 0
+        y: 384
         width: 384
         height: 384
       alignment: 0
@@ -746,6 +779,237 @@ TextureImporter:
       bones: []
       spriteID: 67deb3fd5380e8ee0800000000000000
       internalID: -1257058218518254218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vortex 28
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 384
+        width: 384
+        height: 384
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d0bc4af31add1960800000000000000
+      internalID: 7574449927645606105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vortex 29
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 384
+        width: 384
+        height: 384
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b63e214adf72fe270800000000000000
+      internalID: 8281882210090541931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vortex 30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 384
+        height: 384
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1971cc948770d0b30800000000000000
+      internalID: 4255065436150568849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vortex 31
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 384
+        height: 384
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 391015830190565b0800000000000000
+      internalID: -5375880614927859309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vortex 32
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 384
+        height: 384
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c40a4d0be5eb8c9e0800000000000000
+      internalID: -1600820353627283380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vortex 33
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 384
+        height: 384
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53fd21442b95c8970800000000000000
+      internalID: 8758473997509910325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vortex 34
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 384
+        height: 384
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3064bb21546af5c0800000000000000
+      internalID: -4180919004271714242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vortex 35
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 384
+        height: 384
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f24882d34ce2c6e50800000000000000
+      internalID: 6803864557424509999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vortex 36
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 384
+        width: 384
+        height: 384
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0cfcf60eb79fcb20800000000000000
+      internalID: 3156908706226830349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vortex 37
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 384
+        width: 384
+        height: 384
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1db3335681b819dc0800000000000000
+      internalID: -3633970487417947183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Vortex 38
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 384
+        width: 384
+        height: 384
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86d80eaf3491a6900800000000000000
+      internalID: 678382473635204456
       vertices: []
       indices: 
       edges: []
