@@ -13,7 +13,7 @@ public class GameManager : Singleton<GameManager>
 	public Transform TrainSpawnPoint;
 	public Vector2 CarDisplacement;
 
-	public List<Level> Levels;
+	public Level DebugLevel;
 
 	private Level currentLevel;
 
@@ -23,35 +23,53 @@ public class GameManager : Singleton<GameManager>
 
 	public Text TimerText;
 
+	public GameObject MainMenuScreenPrefab;
+	public Transform ScreenPlaceholder;
+
+	public void Start()
+	{
+		Time.timeScale = 1f;
+		SelectLevel(GameInfo.CurrentLevel);
+	}
+
 	public void SelectLevel(Level level)
 	{
+		if (currentLevel != null)
+		{
+			Debug.LogError("Changing level is not implemented without reloading the scene");
+			return;
+		}
+
 		currentLevel = level;
 
-		pendingCrates = new List<Crate>(level.Crates).OrderBy(t => t.SpawnTimeInSecond).ToList();
-		pendingTrains = new List<Train>(level.Trains).OrderBy(t => t.SpawnTimeInSecond).ToList();
+		if (currentLevel == null)
+		{
+			if (DebugLevel == null)
+			{
+				Debug.LogError("No Level selected in GameInfo.Level and no GameManager.Debuglevel set");
+				return;
+			}
+
+			currentLevel = DebugLevel;
+		}		
+
+		pendingCrates = new List<Crate>(currentLevel.Crates).OrderBy(t => t.SpawnTimeInSecond).ToList();
+		pendingTrains = new List<Train>(currentLevel.Trains).OrderBy(t => t.SpawnTimeInSecond).ToList();
 	}
 
 	public void Update()
 	{
 		if (TimerText != null)
 		{
-			TimerText.text = ""+ (int)Math.Floor(Time.time);
+			TimerText.text = ""+ (int)Math.Floor(Time.timeSinceLevelLoad);
 		}
 
 		HandleDebugInput();
-
-		if (currentLevel == null)
-		{
-			if (Levels.Any())
-			{
-				SelectLevel(Levels.First());
-			}
-			return;
-		}
+		HandleInput();
 
 		if (pendingCrates.Any())
 		{
-			if (pendingCrates[0].SpawnTimeInSecond <= Time.time)
+			if (pendingCrates[0].SpawnTimeInSecond <= Time.timeSinceLevelLoad)
 			{
 				SpawnCrate(pendingCrates[0]);
 				pendingCrates.RemoveAt(0);
@@ -60,11 +78,21 @@ public class GameManager : Singleton<GameManager>
 
 		if (pendingTrains.Any())
 		{
-			if (pendingTrains[0].SpawnTimeInSecond <= Time.time)
+			if (pendingTrains[0].SpawnTimeInSecond <= Time.timeSinceLevelLoad)
 			{
 				SpawnTrain(pendingTrains[0]);
 				pendingTrains.RemoveAt(0);
 			}
+		}
+	}
+
+	private void HandleInput()
+	{
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			var mainMenu = Instantiate(MainMenuScreenPrefab, ScreenPlaceholder);
+			mainMenu.GetComponent<MainMenuScreen>().IsOverlay = true;
+			Time.timeScale = 0;
 		}
 	}
 

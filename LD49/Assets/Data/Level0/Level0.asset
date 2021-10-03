@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91111f3080bc5e84fbae40249c1e7099, type: 3}
   m_Name: Level0
   m_EditorClassIdentifier: 
+  DisplayName: Tutorial
+  Image: {fileID: 21300000, guid: 90eae770dfc033747aa89a8b09ba78c1, type: 3}
   Order: 0
   Trains:
   - {fileID: 11400000, guid: 06ce8f0069c9ca94e88c0a52a70a4a7a, type: 2}
