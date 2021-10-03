@@ -42,6 +42,9 @@ public class GameManager : Singleton<GameManager>
 
 	public Transform TrainStation;
 
+	public GameObject FloatingTextPrefab;
+	public Transform FloatingTextPlaceholder;
+
 	public void Start()
 	{
 		Spells = new List<Spell>
@@ -79,9 +82,23 @@ public class GameManager : Singleton<GameManager>
 		SelectLevel(GameInfo.CurrentLevel);
 	}
 
-	public void SpawnFloatingText(GameObject gameObject, Color green, string v)
+	public void SpawnFloatingText(Vector3 worldPosition, Color color, string text)
 	{
-		//TODO implement this!
+		var viewportPosition = Camera.main.WorldToScreenPoint(worldPosition);
+		SpawnUiFloatintText(viewportPosition, color, text);
+	}
+
+	public void SpawnUiFloatintText(Vector2 screenPosition, Color color, string text)
+	{
+		var newFloatingText = Instantiate(FloatingTextPrefab, FloatingTextPlaceholder);
+
+		//newFloatingText.transform.localPosition = viewportPosition;
+		var rectTransform = newFloatingText.GetComponent<RectTransform>();
+		rectTransform.position = screenPosition;
+
+		var flotingText = newFloatingText.GetComponent<FloatingText>();
+		flotingText.Text.color = color;
+		flotingText.Text.text = text;
 	}
 
 	private void BuildSpellListUi()
@@ -124,6 +141,11 @@ public class GameManager : Singleton<GameManager>
 
 	public void Update()
 	{
+		if (Input.GetMouseButtonDown(0))
+		{
+			SpawnUiFloatintText(Input.mousePosition, Color.white, "Yheaaaa");
+		}
+
 		if (TimerText != null)
 		{
 			TimerText.text = "TIMER: "+ (int)Math.Floor(Time.timeSinceLevelLoad);

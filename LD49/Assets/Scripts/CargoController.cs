@@ -12,7 +12,9 @@ public class CargoController : MonoBehaviour
 
     public CargoType CargoType;
 
-    void Update()
+    public bool IsDestroyed;
+
+	void Update()
     {
         SelectionSprite.SetActive(IsSelected);
     }

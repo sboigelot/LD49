@@ -30,16 +30,23 @@ public class CarController : MonoBehaviour
 
 		StoredCrate.Add(collider.gameObject);
 		GameManager.Instance.Score += Car.ScorePerCargo;
-		GameManager.Instance.SpawnFloatingText(collider.gameObject, Color.green, "+" + Car.ScorePerCargo);
+		GameManager.Instance.SpawnFloatingText(collider.gameObject.transform.localPosition, Color.green, "+" + Car.ScorePerCargo);
 	}
 
 	public void OnTriggerExit2D(Collider2D collider)
     {
         if (StoredCrate.Contains(collider.gameObject))
-        {
-            StoredCrate.Remove(collider.gameObject);
+		{
+			var cargoController = collider.gameObject.GetComponent<CargoController>();
+			StoredCrate.Remove(collider.gameObject);
+
+			if (cargoController.IsDestroyed)
+			{
+				return;
+			}
+			
 			GameManager.Instance.Score -= Car.ScorePerCargo;
-			GameManager.Instance.SpawnFloatingText(collider.gameObject, Color.red, "-" + Car.ScorePerCargo);
+			GameManager.Instance.SpawnFloatingText(collider.gameObject.transform.localPosition, Color.red, "-" + Car.ScorePerCargo);
 		}
     }
 }

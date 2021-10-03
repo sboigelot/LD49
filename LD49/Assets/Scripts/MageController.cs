@@ -9,10 +9,10 @@ public class MageController : Singleton<MageController>
 {
 	public Spell CurrentSpell;
 
-	[Range(0, 100)]
+	[Range(0, 300)]
 	public float MaxMana;
 
-	[Range(0, 100)]
+	[Range(0, 300)]
 	public float CurrentMana;
 
 	#region UI

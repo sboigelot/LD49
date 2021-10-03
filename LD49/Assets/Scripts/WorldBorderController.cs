@@ -9,6 +9,8 @@ public class WorldBorderController : MonoBehaviour
     {
         if (collider.tag.Contains("Crate"))
         {
+            var cargoController = collider.gameObject.GetComponent<CargoController>();
+            cargoController.IsDestroyed = true;
             Destroy(collider.gameObject);
         }
     }
