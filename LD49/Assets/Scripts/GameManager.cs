@@ -110,7 +110,8 @@ public class GameManager : Singleton<GameManager>
 
 		var trainController = newTrain.GetComponent<TrainController>();
 		trainController.Speed = train.Speed;
-		trainController.DestroyXLocation = (train.Cars.Count+1) * CarDisplacement.x; // add size of world / 2
+		var halfSizeOfScreenInUnityUnit = 35;
+		trainController.DestroyXLocation = (train.Cars.Count + 1) * CarDisplacement.x + halfSizeOfScreenInUnityUnit;
 	}
 
 	private void SpawnLocomotive(Train train, GameObject newTrain)

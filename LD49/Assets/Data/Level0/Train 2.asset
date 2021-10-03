@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 228d074a14368ec47aaf78cb1ebf2cef, type: 3}
   m_Name: Train 2
   m_EditorClassIdentifier: 
-  SpawnTimeInSecond: 20
-  Speed: 5
+  SpawnTimeInSecond: 22
+  Speed: 8
   Cars:
   - {fileID: 11400000, guid: 4200d5364a936cf40bb507287939f355, type: 2}
   - {fileID: 11400000, guid: 3f8034bd43c2f624881a7536916703a6, type: 2}
-  LocoPrefab: {fileID: 6357734863492052063, guid: 1e7b00042b431a542b3a96f775938629, type: 3}
+  LocoPrefab: {fileID: 7549022998792803263, guid: 1e7b00042b431a542b3a96f775938629, type: 3}

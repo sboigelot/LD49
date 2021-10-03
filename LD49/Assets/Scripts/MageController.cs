@@ -44,10 +44,6 @@ public class MageController : MonoBehaviour
 	public void Start()
 	{
 		SelectedSpell = Spells.Possession;
-		if (VortexCenter != null)
-		{
-			VortexCenter.gameObject.SetActive(false);
-		}
 
 		if (ManaBar != null)
 		{
@@ -74,7 +70,7 @@ public class MageController : MonoBehaviour
 				SelectedSpell = Spells.Possession;
 				if (VortexCenter != null)
 				{
-					VortexCenter.gameObject.SetActive(false);
+					StartCoroutine(CloseVortex());
 				}
 
 				StartCoroutine(BlinkManaBar(Color.red));
@@ -130,15 +126,14 @@ public class MageController : MonoBehaviour
 
 			if (VortexCenter != null)
 			{
-				VortexCenter.gameObject.SetActive(SelectedSpell == Spells.Vortex); //Coroutine set false after end of anim
-
 				if (SelectedSpell == Spells.Vortex)
 				{
+					VortexCenter.gameObject.SetActive(true);
 					VortexCenter.GetComponent<Animator>().Play("Appear");
 				}
 				else
 				{
-					VortexCenter.GetComponent<Animator>().Play("Disappear");
+					StartCoroutine(CloseVortex());
 				}
 			}
 		}
@@ -219,6 +214,31 @@ public class MageController : MonoBehaviour
 			VortexCenter.position.x + vector2.x,
 			VortexCenter.position.y + vector2.y,
 			VortexCenter.position.z);
+	}
+
+	/// <summary>
+	/// Wait for the end of the vortex animation than disable the Vortex
+	/// </summary>
+	/// <returns></returns>
+	private IEnumerator CloseVortex()
+	{
+		if (VortexCenter == null)
+		{
+			yield break;
+		}
+
+		var animator = VortexCenter.GetComponent<Animator>();
+		animator.Play("Disappear");
+
+		// Length is always 0
+		//var clipInfo = animator.GetCurrentAnimatorClipInfo(0);
+		//yield return new WaitForSeconds(clipInfo.Length);
+
+		int numberOfAsepriteFrame = 6;
+		float asepriteFrameTime = 60f / 1000f;
+		yield return new WaitForSeconds((float)numberOfAsepriteFrame * asepriteFrameTime);
+		
+		VortexCenter.gameObject.SetActive(false);
 	}
 
 	private IEnumerator BlinkManaBar(Color color)
