@@ -35,6 +35,7 @@ public class GameManager : Singleton<GameManager>
 	public Sprite SpellIconForcePursh;
 	public Sprite SpellIconVortex;
 	public Sprite SpellIconMeditate;
+	public Sprite SpellIconWorldImpact;
 
 	public int Score;
 	public Text ScoreText;
@@ -62,6 +63,13 @@ public class GameManager : Singleton<GameManager>
 				DisplayName = "Vortex",
 				Icon = SpellIconVortex,
 				ManaCostPerSecond = 5,
+			},
+			new WorldImpactSpell{
+				ActivationCode = KeyCode.Alpha4,
+				DisplayName = "World Impact",
+				Icon = SpellIconWorldImpact,
+				ManaCost = 25,
+				Intensity = new Vector3(0,3,5)
 			},
 		};
 
@@ -162,13 +170,29 @@ public class GameManager : Singleton<GameManager>
 		switch (worldEvent.WorldEventType)
 		{
 			case WorldEventType.Tilt:
-				TrainStation.Rotate(new Vector3(0, 0, worldEvent.Intensity.z));
+				var intensity = worldEvent.Intensity.z;
+				TiltWorld(intensity);
 				break;
 
 			case WorldEventType.Gravity:
-				Physics2D.gravity = worldEvent.Intensity;
+				ChangeGravity(worldEvent.Intensity);
 				break;
 		}
+	}
+
+	public void ChangeGravity(Vector2 gravity)
+	{
+		Physics2D.gravity = gravity;
+	}
+
+	public void ImpactGravity(float updown)
+	{
+		Physics2D.gravity = new Vector2(Physics2D.gravity.x, Physics2D.gravity.y + updown);
+	}
+
+	public void TiltWorld(float intensity)
+	{
+		TrainStation.Rotate(new Vector3(0, 0, intensity));
 	}
 
 	private void HandleInput()
