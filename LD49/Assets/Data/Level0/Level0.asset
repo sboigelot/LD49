@@ -22,4 +22,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f59f175348637fa4ca9a5c73355684a8, type: 2}
   - {fileID: 11400000, guid: 6445dfc0993700e428a87c5e1e4c1e8c, type: 2}
   - {fileID: 11400000, guid: 490ac57043cf110489bc2f2fcd914cdc, type: 2}
+  WorldEvents:
+  - {fileID: 11400000, guid: 6f7fb37758260d24bb2fe907fbe0377d, type: 2}
+  - {fileID: 11400000, guid: aacbb4590f387c6489b313064bab49c6, type: 2}
   TargetScores: 96000000f4010000bc020000

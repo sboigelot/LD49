@@ -20,8 +20,8 @@ public class GameManager : Singleton<GameManager>
 	private Level currentLevel;
 
 	private List<Cargo> pendingCargos;
-
 	private List<Train> pendingTrains;
+	private List<WorldEvent> pendingWorldEvents;
 
 	public Text TimerText;
 
@@ -32,13 +32,14 @@ public class GameManager : Singleton<GameManager>
 	public Transform SpellGrid;
 	public List<Spell> Spells;
 
-
 	public Sprite SpellIconForcePursh;
 	public Sprite SpellIconVortex;
 	public Sprite SpellIconMeditate;
 
 	public int Score;
 	public Text ScoreText;
+
+	public Transform TrainStation;
 
 	public void Start()
 	{
@@ -110,6 +111,7 @@ public class GameManager : Singleton<GameManager>
 
 		pendingCargos = new List<Cargo>(currentLevel.Cargos).OrderBy(t => t.SpawnTimeInSecond).ToList();
 		pendingTrains = new List<Train>(currentLevel.Trains).OrderBy(t => t.SpawnTimeInSecond).ToList();
+		pendingWorldEvents = new List<WorldEvent>(currentLevel.WorldEvents).OrderBy(t => t.SpawnTimeInSecond).ToList();
 	}
 
 	public void Update()
@@ -143,6 +145,29 @@ public class GameManager : Singleton<GameManager>
 				SpawnTrain(pendingTrains[0]);
 				pendingTrains.RemoveAt(0);
 			}
+		}
+
+		if (pendingWorldEvents.Any())
+		{
+			if (pendingWorldEvents[0].SpawnTimeInSecond <= Time.timeSinceLevelLoad)
+			{
+				TriggerWorldEvent(pendingWorldEvents[0]);
+				pendingWorldEvents.RemoveAt(0);
+			}
+		}
+	}
+
+	private void TriggerWorldEvent(WorldEvent worldEvent)
+	{
+		switch (worldEvent.WorldEventType)
+		{
+			case WorldEventType.Tilt:
+				TrainStation.Rotate(new Vector3(0, 0, worldEvent.Intensity.z));
+				break;
+
+			case WorldEventType.Gravity:
+				Physics2D.gravity = worldEvent.Intensity;
+				break;
 		}
 	}
 

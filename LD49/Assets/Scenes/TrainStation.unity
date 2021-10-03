@@ -861,7 +861,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxMana: 100
   CurrentMana: 65.1
-  ManaRegenerationPerSecond: 20
   ManaBar: {fileID: 109344796}
 --- !u!212 &595402693
 SpriteRenderer:
@@ -2044,8 +2043,10 @@ MonoBehaviour:
   SpellGrid: {fileID: 1398932107}
   SpellIconForcePursh: {fileID: 298174366866795080, guid: fdd8e4248c039704a80a01150ffe8b8e, type: 3}
   SpellIconVortex: {fileID: 261544117506233464, guid: 046656c85cfcf93438e9b6a5479bf1f1, type: 3}
+  SpellIconMeditate: {fileID: 0}
   Score: 0
   ScoreText: {fileID: 1778882768}
+  TrainStation: {fileID: 246025843}
 --- !u!4 &1863632743
 Transform:
   m_ObjectHideFlags: 0

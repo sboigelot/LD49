@@ -17,5 +17,7 @@ public class Level : ScriptableObject
 
 	public List<Cargo> Cargos;
 
+	public List<WorldEvent> WorldEvents;
+
 	public List<int> TargetScores;
 }
