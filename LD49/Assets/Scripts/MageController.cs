@@ -15,9 +15,6 @@ public class MageController : Singleton<MageController>
 	[Range(0, 100)]
 	public float CurrentMana;
 
-	//Meditate Spell
-	public float ManaRegenerationPerSecond;
-
 	#region UI
 	public Slider ManaBar;
 	private Image manaBarFillImage;
@@ -67,19 +64,8 @@ public class MageController : Singleton<MageController>
 			}
 		}
 
-		//Move to meditate ?
-		RegenerateMana();
-
 		HandleChangeSelectedSpell();
 		UpdateUi();
-	}
-
-	private void RegenerateMana()
-	{
-		if (CurrentMana < MaxMana)
-		{
-			CurrentMana += (ManaRegenerationPerSecond * Time.deltaTime);
-		}
 	}
 
 	private void UpdateUi()

@@ -35,6 +35,7 @@ public class GameManager : Singleton<GameManager>
 
 	public Sprite SpellIconForcePursh;
 	public Sprite SpellIconVortex;
+	public Sprite SpellIconMeditate;
 
 	public int Score;
 	public Text ScoreText;
@@ -43,18 +44,24 @@ public class GameManager : Singleton<GameManager>
 	{
 		Spells = new List<Spell>
 		{
-			new ForcePushSpell {
+			new MeditateSpell {
 				ActivationCode = KeyCode.Alpha1,
+				DisplayName = "Meditate",
+				Icon = SpellIconMeditate,
+				ManaRegenPerSecond = 50,
+			},
+			new ForcePushSpell {
+				ActivationCode = KeyCode.Alpha2,
 				DisplayName = "Force Push",
 				Icon = SpellIconForcePursh,
 				ForcePower = 8,
 				ManaCost = 20 },
 			new VortexSpell {
-				ActivationCode = KeyCode.Alpha2,
+				ActivationCode = KeyCode.Alpha3,
 				DisplayName = "Vortex",
 				Icon = SpellIconVortex,
 				ManaCostPerSecond = 5,
-			}
+			},
 		};
 
 		BuildSpellListUi();
