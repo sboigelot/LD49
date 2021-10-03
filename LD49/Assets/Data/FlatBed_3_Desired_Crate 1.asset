@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3ffa330198add54d9d6c60f61bca21c, type: 3}
+  m_Name: FlatBed_3_Desired_Crate 1
+  m_EditorClassIdentifier: 
+  CarType: 0
+  DesiredCrateCount: 3
+  CarPrefab: {fileID: 7738068881621948075, guid: f0c029e970c371e458a231050958a43e, type: 3}

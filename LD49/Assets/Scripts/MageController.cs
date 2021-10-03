@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class MageController : MonoBehaviour
 {
-
 	public enum Spells
 	{
 		Possession,
