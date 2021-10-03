@@ -18,7 +18,8 @@ MonoBehaviour:
   Trains:
   - {fileID: 11400000, guid: 06ce8f0069c9ca94e88c0a52a70a4a7a, type: 2}
   - {fileID: 11400000, guid: 199c2f5d2d5b08149a503d781b02fc69, type: 2}
-  Crates:
-  - {fileID: 11400000, guid: ae796ff1d32f79e4fbd81c5ac5625f04, type: 2}
-  - {fileID: 11400000, guid: ce85c4fc0eb82df4aaee477e481a66f9, type: 2}
-  - {fileID: 11400000, guid: db27d5b5f97ce2d44b1820391fe94d1d, type: 2}
+  Cargos:
+  - {fileID: 11400000, guid: f59f175348637fa4ca9a5c73355684a8, type: 2}
+  - {fileID: 11400000, guid: 6445dfc0993700e428a87c5e1e4c1e8c, type: 2}
+  - {fileID: 11400000, guid: 490ac57043cf110489bc2f2fcd914cdc, type: 2}
+  TargetScores: 96000000f4010000bc020000

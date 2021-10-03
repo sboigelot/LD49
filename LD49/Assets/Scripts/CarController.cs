@@ -6,21 +6,40 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class CarController : MonoBehaviour
 {
+    public Car Car;
+
     public List<GameObject> StoredCrate = new List<GameObject>();
 
-    public void OnTriggerEnter2D(Collider2D crate)
-    {
-        if (!StoredCrate.Contains(crate.gameObject))
-        {
-            StoredCrate.Add(crate.gameObject);
-        }
-    }
+    public void OnTriggerEnter2D(Collider2D collider)
+	{
+		if (StoredCrate.Contains(collider.gameObject))
+		{
+			return;
+		}
 
-    public void OnTriggerExit2D(Collider2D crate)
+		var cargoController = collider.gameObject.GetComponent<CargoController>();
+		if (cargoController == null)
+		{
+			return;
+		}
+
+		if (cargoController.CargoType != Car.DesiredCargoType)
+		{
+			return;
+		}
+
+		StoredCrate.Add(collider.gameObject);
+		GameManager.Instance.Score += Car.ScorePerCargo;
+		GameManager.Instance.SpawnFloatingText(collider.gameObject, Color.green, "+" + Car.ScorePerCargo);
+	}
+
+	public void OnTriggerExit2D(Collider2D collider)
     {
-        if (StoredCrate.Contains(crate.gameObject))
+        if (StoredCrate.Contains(collider.gameObject))
         {
-            StoredCrate.Remove(crate.gameObject);
-        }
+            StoredCrate.Remove(collider.gameObject);
+			GameManager.Instance.Score -= Car.ScorePerCargo;
+			GameManager.Instance.SpawnFloatingText(collider.gameObject, Color.red, "-" + Car.ScorePerCargo);
+		}
     }
 }

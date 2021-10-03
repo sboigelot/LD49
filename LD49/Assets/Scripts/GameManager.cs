@@ -19,7 +19,7 @@ public class GameManager : Singleton<GameManager>
 
 	private Level currentLevel;
 
-	private List<Crate> pendingCrates;
+	private List<Cargo> pendingCargos;
 
 	private List<Train> pendingTrains;
 
@@ -35,6 +35,9 @@ public class GameManager : Singleton<GameManager>
 
 	public Sprite SpellIconForcePursh;
 	public Sprite SpellIconVortex;
+
+	public int Score;
+	public Text ScoreText;
 
 	public void Start()
 	{
@@ -58,6 +61,11 @@ public class GameManager : Singleton<GameManager>
 
 		Time.timeScale = 1f;
 		SelectLevel(GameInfo.CurrentLevel);
+	}
+
+	public void SpawnFloatingText(GameObject gameObject, Color green, string v)
+	{
+		//TODO implement this!
 	}
 
 	private void BuildSpellListUi()
@@ -93,7 +101,7 @@ public class GameManager : Singleton<GameManager>
 			currentLevel = DebugLevel;
 		}		
 
-		pendingCrates = new List<Crate>(currentLevel.Crates).OrderBy(t => t.SpawnTimeInSecond).ToList();
+		pendingCargos = new List<Cargo>(currentLevel.Cargos).OrderBy(t => t.SpawnTimeInSecond).ToList();
 		pendingTrains = new List<Train>(currentLevel.Trains).OrderBy(t => t.SpawnTimeInSecond).ToList();
 	}
 
@@ -101,18 +109,23 @@ public class GameManager : Singleton<GameManager>
 	{
 		if (TimerText != null)
 		{
-			TimerText.text = ""+ (int)Math.Floor(Time.timeSinceLevelLoad);
+			TimerText.text = "TIMER: "+ (int)Math.Floor(Time.timeSinceLevelLoad);
+		}
+
+		if (ScoreText != null)
+		{
+			ScoreText.text = "SCORE: " + Score;
 		}
 
 		HandleDebugInput();
 		HandleInput();
 
-		if (pendingCrates.Any())
+		if (pendingCargos.Any())
 		{
-			if (pendingCrates[0].SpawnTimeInSecond <= Time.timeSinceLevelLoad)
+			if (pendingCargos[0].SpawnTimeInSecond <= Time.timeSinceLevelLoad)
 			{
-				SpawnCrate(pendingCrates[0]);
-				pendingCrates.RemoveAt(0);
+				SpawnCrate(pendingCargos[0]);
+				pendingCargos.RemoveAt(0);
 			}
 		}
 
@@ -144,13 +157,13 @@ public class GameManager : Singleton<GameManager>
 		}
 	}
 
-	public void SpawnCrate(Crate crate)
+	public void SpawnCrate(Cargo cargo)
 	{
-		var prefab = crate == null ? DebugCratePrefab : crate.CratePrefab;
-		var displacement = crate == null ? Vector2.zero : crate.Displacement;
+		var prefab = cargo == null ? DebugCratePrefab : cargo.CargoPrefab;
+		var displacement = cargo == null ? Vector2.zero : cargo.Displacement;
 
-		var newCrate = Instantiate(prefab, CrateSpawnPoint.parent);
-		newCrate.transform.position = new Vector3(
+		var newCargo = Instantiate(prefab, CrateSpawnPoint.parent);
+		newCargo.transform.position = new Vector3(
 			CrateSpawnPoint.transform.position.x + displacement.x,
 			CrateSpawnPoint.transform.position.y + displacement.y,
 			CrateSpawnPoint.transform.position.z);
@@ -192,11 +205,13 @@ public class GameManager : Singleton<GameManager>
 
 	private void SpawnCar(Car car, int i, GameObject newTrain)
 	{
-		var newCrate = Instantiate(car.CarPrefab, newTrain.transform);
+		var newCar = Instantiate(car.CarPrefab, newTrain.transform);
 
-		newCrate.transform.position = new Vector3(
+		newCar.transform.position = new Vector3(
 			newTrain.transform.transform.position.x - (i+1) * CarDisplacement.x,
 			newTrain.transform.transform.position.y - CarDisplacement.y,
 			newTrain.transform.transform.position.z);
+
+		newCar.GetComponent<CarController>().Car = car;
 	}
 }

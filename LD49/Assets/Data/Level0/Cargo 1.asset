@@ -10,7 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e30c619ed72fcb478f0bf73a5107ddc, type: 3}
-  m_Name: Crate 2
+  m_Name: Cargo 1
   m_EditorClassIdentifier: 
-  SpawnTimeInSecond: 7
-  CratePrefab: {fileID: 5942365603196322449, guid: 3132090b43a75264c806bf149beab94b, type: 3}
+  SpawnTimeInSecond: 2
+  CargoPrefab: {fileID: 5942365603196322449, guid: 00698343308d4b4409a84140792717eb, type: 3}
+  Displacement: {x: 1, y: 0}
+  CargoType: 0
+  Icon: {fileID: 21300000, guid: b1ab6635b5fff3a4d8da2d903fc2d31e, type: 3}

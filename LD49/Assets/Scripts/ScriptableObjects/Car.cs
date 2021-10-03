@@ -3,9 +3,9 @@
 [CreateAssetMenu(fileName = "Car", menuName = "TrainMage/Car")]
 public class Car : ScriptableObject
 {
-	//public CarType CarType;
+	public CargoType DesiredCargoType;
 
-	public int DesiredCrateCount;
+	public int ScorePerCargo;
 
 	public GameObject CarPrefab;
 }

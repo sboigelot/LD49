@@ -15,5 +15,7 @@ public class Level : ScriptableObject
 
 	public List<Train> Trains;
 
-	public List<Crate> Crates;
+	public List<Cargo> Cargos;
+
+	public List<int> TargetScores;
 }

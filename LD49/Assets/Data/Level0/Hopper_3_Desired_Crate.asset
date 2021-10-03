@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d3ffa330198add54d9d6c60f61bca21c, type: 3}
-  m_Name: FlatBed_3_Desired_Crate 1
+  m_Name: Hopper_3_Desired_Crate
   m_EditorClassIdentifier: 
-  CarType: 0
-  DesiredCrateCount: 3
-  CarPrefab: {fileID: 7738068881621948075, guid: f0c029e970c371e458a231050958a43e, type: 3}
+  DesiredCargoType: 1
+  ScorePerCargo: 100
+  CarPrefab: {fileID: 8046768765713332664, guid: 22ca4eb1cddcb554db924b227dd03f81, type: 3}

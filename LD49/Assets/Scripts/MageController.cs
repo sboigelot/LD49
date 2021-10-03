@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,8 +26,6 @@ public class MageController : Singleton<MageController>
 
 	public void Start()
 	{
-		SelectSpell(GameManager.Instance.Spells[0]); ;
-
 		if (ManaBar != null)
 		{
 			manaBarFillImage = ManaBar.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>();
@@ -57,6 +56,14 @@ public class MageController : Singleton<MageController>
 			{
 				CurrentSpell.OnUpdate();
 				CurrentSpell.OnHandleInputs();
+			}
+		}
+		else
+		{
+			if (GameManager.Instance.Spells != null &&
+				GameManager.Instance.Spells.Any())
+			{
+				SelectSpell(GameManager.Instance.Spells[0]);
 			}
 		}
 

@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e30c619ed72fcb478f0bf73a5107ddc, type: 3}
-  m_Name: Crate 3
+  m_Script: {fileID: 11500000, guid: d3ffa330198add54d9d6c60f61bca21c, type: 3}
+  m_Name: Tank_3_Desired_Crate 1
   m_EditorClassIdentifier: 
-  SpawnTimeInSecond: 15
-  CratePrefab: {fileID: 5942365603196322449, guid: 3132090b43a75264c806bf149beab94b, type: 3}
-  Displacement: {x: 1.5, y: 0}
+  DesiredCargoType: 2
+  ScorePerCargo: 300
+  CarPrefab: {fileID: 8088310316098464019, guid: 871721b5eaf08264f9f8453e030564b9, type: 3}

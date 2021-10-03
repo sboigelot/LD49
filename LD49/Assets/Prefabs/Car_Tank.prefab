@@ -702,6 +702,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72ce6a0b25525f940ab7ea38732914d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DesiredCargoType: 0
   StoredCrate: []
 --- !u!1 &8088310316185634545
 GameObject:
