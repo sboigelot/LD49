@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManager : Singleton<GameManager>
+public class GameManager : MonoBehaviourSingleton<GameManager>
 {
 	public GameObject DebugCratePrefab;
 	public Transform CrateSpawnPoint;
@@ -17,7 +17,7 @@ public class GameManager : Singleton<GameManager>
 
 	public Level DebugLevel;
 
-	private Level currentLevel;
+	public Level CurrentLevel;
 
 	private List<Cargo> pendingCargos;
 	private List<Train> pendingTrains;
@@ -48,6 +48,8 @@ public class GameManager : Singleton<GameManager>
 	public GameObject FloatingSpritePrefab;
 
 	public Sprite Smoke;
+
+	public GameObject EndLevelScreenPrefab;
 
 	public void Start()
 	{
@@ -142,15 +144,15 @@ public class GameManager : Singleton<GameManager>
 
 	public void SelectLevel(Level level)
 	{
-		if (currentLevel != null)
+		if (CurrentLevel != null)
 		{
 			Debug.LogError("Changing level is not implemented without reloading the scene");
 			return;
 		}
 
-		currentLevel = level;
+		CurrentLevel = level;
 
-		if (currentLevel == null)
+		if (CurrentLevel == null)
 		{
 			if (DebugLevel == null)
 			{
@@ -158,21 +160,16 @@ public class GameManager : Singleton<GameManager>
 				return;
 			}
 
-			currentLevel = DebugLevel;
+			CurrentLevel = DebugLevel;
 		}		
 
-		pendingCargos = new List<Cargo>(currentLevel.Cargos).OrderBy(t => t.SpawnTimeInSecond).ToList();
-		pendingTrains = new List<Train>(currentLevel.Trains).OrderBy(t => t.SpawnTimeInSecond).ToList();
-		pendingWorldEvents = new List<WorldEvent>(currentLevel.WorldEvents).OrderBy(t => t.SpawnTimeInSecond).ToList();
+		pendingCargos = new List<Cargo>(CurrentLevel.Cargos).OrderBy(t => t.SpawnTimeInSecond).ToList();
+		pendingTrains = new List<Train>(CurrentLevel.Trains).OrderBy(t => t.SpawnTimeInSecond).ToList();
+		pendingWorldEvents = new List<WorldEvent>(CurrentLevel.WorldEvents).OrderBy(t => t.SpawnTimeInSecond).ToList();
 	}
 
 	public void Update()
 	{
-		if (Input.GetMouseButtonDown(0))
-		{
-			SpawnUiFloatintSprite(Input.mousePosition, 0.8f, Smoke);
-		}
-
 		if (TimerText != null)
 		{
 			TimerText.text = "TIMER: "+ (int)Math.Floor(Time.timeSinceLevelLoad);
@@ -226,7 +223,16 @@ public class GameManager : Singleton<GameManager>
 			case WorldEventType.Gravity:
 				ChangeGravity(worldEvent.Intensity);
 				break;
+
+			case WorldEventType.EndGame:
+				GameOver();
+				break;
 		}
+	}
+
+	private void GameOver()
+	{
+		OpenEndScreen();
 	}
 
 	public void ChangeGravity(Vector2 gravity)
@@ -252,6 +258,13 @@ public class GameManager : Singleton<GameManager>
 			mainMenu.GetComponent<MainMenuScreen>().IsOverlay = true;
 			Time.timeScale = 0;
 		}
+	}
+
+	public void OpenEndScreen()
+	{
+		var endScreen = Instantiate(EndLevelScreenPrefab, ScreenPlaceholder);
+		endScreen.GetComponent<EndLevelScreen>().Open(CurrentLevel, Score);
+		Time.timeScale = 0;
 	}
 
 	private void HandleDebugInput()

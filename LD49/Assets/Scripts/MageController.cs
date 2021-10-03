@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MageController : Singleton<MageController>
+public class MageController : MonoBehaviourSingleton<MageController>
 {
 	public Spell CurrentSpell;
 
@@ -57,7 +57,8 @@ public class MageController : Singleton<MageController>
 		}
 		else
 		{
-			if (GameManager.Instance.Spells != null &&
+			if (GameManager.Instance != null &&
+				GameManager.Instance.Spells != null &&
 				GameManager.Instance.Spells.Any())
 			{
 				SelectSpell(GameManager.Instance.Spells[0]);

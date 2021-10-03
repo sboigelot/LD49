@@ -25,4 +25,5 @@ MonoBehaviour:
   WorldEvents:
   - {fileID: 11400000, guid: 6f7fb37758260d24bb2fe907fbe0377d, type: 2}
   - {fileID: 11400000, guid: aacbb4590f387c6489b313064bab49c6, type: 2}
+  - {fileID: 11400000, guid: 9da2b97191869b54fabc03968f9ba6e8, type: 2}
   TargetScores: 96000000f4010000bc020000

@@ -2088,6 +2088,7 @@ MonoBehaviour:
   FloatingTextPlaceholder: {fileID: 939221968}
   FloatingSpritePrefab: {fileID: 3226743368349165661, guid: 253a349f2d0f06b4192c61077f1fcfc8, type: 3}
   Smoke: {fileID: 21300000, guid: c8df898746b432d40a7eecf0541ba7bd, type: 3}
+  EndLevelScreenPrefab: {fileID: 3734787757398019639, guid: 24772823c32baf94188ae4f666e25b32, type: 3}
 --- !u!4 &1863632743
 Transform:
   m_ObjectHideFlags: 0

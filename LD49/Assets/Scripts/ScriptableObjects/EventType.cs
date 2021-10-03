@@ -1,7 +1,8 @@
 ﻿public enum WorldEventType
 {
 	Tilt,
-	Gravity
+	Gravity,
+	EndGame
 }
 
 
