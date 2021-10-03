@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -20,6 +21,8 @@ public class GameManager : Singleton<GameManager>
 
 	private List<Train> pendingTrains;
 
+	public Text TimerText;
+
 	public void SelectLevel(Level level)
 	{
 		currentLevel = level;
@@ -30,6 +33,11 @@ public class GameManager : Singleton<GameManager>
 
 	public void Update()
 	{
+		if (TimerText != null)
+		{
+			TimerText.text = ""+ (int)Math.Floor(Time.time);
+		}
+
 		HandleDebugInput();
 
 		if (currentLevel == null)
@@ -64,16 +72,19 @@ public class GameManager : Singleton<GameManager>
 	{
 		if (Input.GetKeyDown(KeyCode.Keypad5))
 		{
-			SpawnCrate(new Crate { CratePrefab = DebugCratePrefab });
+			SpawnCrate(null);
 		}
 	}
 
 	public void SpawnCrate(Crate crate)
 	{
-		var newCrate = Instantiate(crate.CratePrefab, CrateSpawnPoint);
+		var prefab = crate == null ? DebugCratePrefab : crate.CratePrefab;
+		var displacement = crate == null ? Vector2.zero : crate.Displacement;
+
+		var newCrate = Instantiate(prefab, CrateSpawnPoint);
 		newCrate.transform.position = new Vector3(
-			CrateSpawnPoint.transform.position.x + crate.Displacement.x,
-			CrateSpawnPoint.transform.position.y + crate.Displacement.y,
+			CrateSpawnPoint.transform.position.x + displacement.x,
+			CrateSpawnPoint.transform.position.y + displacement.y,
 			CrateSpawnPoint.transform.position.z);
 		FindObjectOfType<MageController>().SelectedCrate = newCrate.GetComponent<Rigidbody2D>();
 	}
@@ -97,7 +108,9 @@ public class GameManager : Singleton<GameManager>
 			SpawnCar(car, i, newTrain);
 		}
 
-		newTrain.GetComponent<TrainController>().Speed = train.Speed;
+		var trainController = newTrain.GetComponent<TrainController>();
+		trainController.Speed = train.Speed;
+		trainController.DestroyXLocation = (train.Cars.Count+1) * CarDisplacement.x; // add size of world / 2
 	}
 
 	private void SpawnLocomotive(Train train, GameObject newTrain)

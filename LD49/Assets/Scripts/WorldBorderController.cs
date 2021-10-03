@@ -5,8 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class WorldBorderController : MonoBehaviour
 {
-    public void OnTriggerEnter2D(Collider2D crate)
+    public void OnTriggerEnter2D(Collider2D collider)
     {
-        Destroy(crate.gameObject);
+        if (collider.tag.Contains("Crate"))
+        {
+            Destroy(collider.gameObject);
+        }
     }
 }
