@@ -13,6 +13,8 @@ public class FloatingText : MonoBehaviour
 
     public Text Text;
 
+    public Image Image;
+
 	public void Start()
 	{
         BirthTime = Time.time;

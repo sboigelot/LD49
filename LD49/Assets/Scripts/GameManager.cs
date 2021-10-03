@@ -45,6 +45,10 @@ public class GameManager : Singleton<GameManager>
 	public GameObject FloatingTextPrefab;
 	public Transform FloatingTextPlaceholder;
 
+	public GameObject FloatingSpritePrefab;
+
+	public Sprite Smoke;
+
 	public void Start()
 	{
 		Spells = new List<Spell>
@@ -82,13 +86,13 @@ public class GameManager : Singleton<GameManager>
 		SelectLevel(GameInfo.CurrentLevel);
 	}
 
-	public void SpawnFloatingText(Vector3 worldPosition, Color color, string text)
+	public FloatingText SpawnFloatingText(Vector3 worldPosition, Color color, string text)
 	{
 		var viewportPosition = Camera.main.WorldToScreenPoint(worldPosition);
-		SpawnUiFloatintText(viewportPosition, color, text);
+		return SpawnUiFloatintText(viewportPosition, color, text);
 	}
 
-	public void SpawnUiFloatintText(Vector2 screenPosition, Color color, string text)
+	public FloatingText SpawnUiFloatintText(Vector2 screenPosition, Color color, string text)
 	{
 		var newFloatingText = Instantiate(FloatingTextPrefab, FloatingTextPlaceholder);
 
@@ -99,6 +103,29 @@ public class GameManager : Singleton<GameManager>
 		var flotingText = newFloatingText.GetComponent<FloatingText>();
 		flotingText.Text.color = color;
 		flotingText.Text.text = text;
+
+		return flotingText;
+	}
+
+	public FloatingText SpawnFloatingSprite(Vector3 worldPosition, float opacity, Sprite sprite)
+	{
+		var viewportPosition = Camera.main.WorldToScreenPoint(worldPosition);
+		return SpawnUiFloatintSprite(viewportPosition, opacity, sprite);
+	}
+
+	public FloatingText SpawnUiFloatintSprite(Vector2 screenPosition, float opacity, Sprite sprite)
+	{
+		var newFloatingText = Instantiate(FloatingSpritePrefab, FloatingTextPlaceholder);
+
+		//newFloatingText.transform.localPosition = viewportPosition;
+		var rectTransform = newFloatingText.GetComponent<RectTransform>();
+		rectTransform.position = screenPosition;
+
+		var flotingText = newFloatingText.GetComponent<FloatingText>();
+		flotingText.Image.color = new Color(1f, 1f, 1f, opacity);
+		flotingText.Image.sprite = sprite;
+
+		return flotingText;
 	}
 
 	private void BuildSpellListUi()
@@ -143,7 +170,7 @@ public class GameManager : Singleton<GameManager>
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
-			SpawnUiFloatintText(Input.mousePosition, Color.white, "Yheaaaa");
+			SpawnUiFloatintSprite(Input.mousePosition, 0.8f, Smoke);
 		}
 
 		if (TimerText != null)
