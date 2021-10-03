@@ -203,14 +203,14 @@ public class GameManager : Singleton<GameManager>
 
 	public void SpawnTrain(Train train)
 	{
-		var newTrain = new GameObject("Train", typeof(TrainController));
+		var newTrain = new GameObject("Train", typeof(TrainController), typeof(Rigidbody2D));
 
 		newTrain.transform.SetParent(TrainSpawnPoint);
 		newTrain.transform.position = new Vector3(
 			TrainSpawnPoint.transform.position.x,
 			TrainSpawnPoint.transform.position.y,
 			TrainSpawnPoint.transform.position.z);
-
+		
 		SpawnLocomotive(train, newTrain);
 
 		for (int i = 0; i < train.Cars.Count; i++)
@@ -224,6 +224,10 @@ public class GameManager : Singleton<GameManager>
 		trainController.Speed = train.Speed;
 		var halfSizeOfScreenInUnityUnit = 35;
 		trainController.DestroyXLocation = (train.Cars.Count + 1) * CarDisplacement.x + halfSizeOfScreenInUnityUnit;
+
+		var rigidBody = newTrain.GetComponent<Rigidbody2D>();
+		rigidBody.bodyType = RigidbodyType2D.Kinematic;
+		rigidBody.gravityScale = 0f;
 	}
 
 	private void SpawnLocomotive(Train train, GameObject newTrain)

@@ -9,16 +9,16 @@ public class TrainController : MonoBehaviour
 
     public float DestroyXLocation;
 
-    public void Update()
-    {
-        transform.localPosition = new Vector3(
-            transform.localPosition.x + Speed * Time.deltaTime,
-            transform.localPosition.y,
-            transform.localPosition.z);
+    private Rigidbody2D rb2D;
 
-        if (transform.localPosition.x >= DestroyXLocation)
-        {
-            Destroy(gameObject);
-        }
-    }
+	public void Start()
+	{
+		rb2D = GetComponent<Rigidbody2D>();
+	}
+
+	public void FixedUpdate()
+    {
+		var velocity = new Vector2(Speed, 0);
+		rb2D.MovePosition(rb2D.position + velocity * Time.fixedDeltaTime);
+	}
 }
