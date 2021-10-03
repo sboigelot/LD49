@@ -13,6 +13,8 @@ public class GameManager : Singleton<GameManager>
 	public Transform TrainSpawnPoint;
 	public Vector2 CarDisplacement;
 
+	public Transform VortexCenter;
+
 	public Level DebugLevel;
 
 	private Level currentLevel;
@@ -26,10 +28,48 @@ public class GameManager : Singleton<GameManager>
 	public GameObject MainMenuScreenPrefab;
 	public Transform ScreenPlaceholder;
 
+	public GameObject SpellButtonPrefab;
+	public Transform SpellGrid;
+	public List<Spell> Spells;
+
+
+	public Sprite SpellIconForcePursh;
+	public Sprite SpellIconVortex;
+
 	public void Start()
 	{
+		Spells = new List<Spell>
+		{
+			new ForcePushSpell {
+				ActivationCode = KeyCode.Alpha1,
+				DisplayName = "Force Push",
+				Icon = SpellIconForcePursh,
+				ForcePower = 8,
+				ManaCost = 20 },
+			new VortexSpell {
+				ActivationCode = KeyCode.Alpha2,
+				DisplayName = "Vortex",
+				Icon = SpellIconVortex,
+				ManaCostPerSecond = 5,
+			}
+		};
+
+		BuildSpellListUi();
+
 		Time.timeScale = 1f;
 		SelectLevel(GameInfo.CurrentLevel);
+	}
+
+	private void BuildSpellListUi()
+	{
+		SpellGrid.ClearChildren();
+		foreach (var spell in Spells)
+		{
+			var spellButton = Instantiate(SpellButtonPrefab, SpellGrid);
+			var spellButtonController = spellButton.GetComponent<SpellButton>();
+			spellButtonController.Spell = spell;
+			spellButtonController.ReBuild();
+		}
 	}
 
 	public void SelectLevel(Level level)
@@ -109,12 +149,11 @@ public class GameManager : Singleton<GameManager>
 		var prefab = crate == null ? DebugCratePrefab : crate.CratePrefab;
 		var displacement = crate == null ? Vector2.zero : crate.Displacement;
 
-		var newCrate = Instantiate(prefab, CrateSpawnPoint);
+		var newCrate = Instantiate(prefab, CrateSpawnPoint.parent);
 		newCrate.transform.position = new Vector3(
 			CrateSpawnPoint.transform.position.x + displacement.x,
 			CrateSpawnPoint.transform.position.y + displacement.y,
 			CrateSpawnPoint.transform.position.z);
-		FindObjectOfType<MageController>().SelectedCrate = newCrate.GetComponent<Rigidbody2D>();
 	}
 
 	public void SpawnTrain(Train train)

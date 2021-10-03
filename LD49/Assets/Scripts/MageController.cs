@@ -4,23 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MageController : MonoBehaviour
+public class MageController : Singleton<MageController>
 {
-	public enum Spells
-	{
-		Possession,
-		Vortex
-	}
-
-	public Rigidbody2D SelectedCrate;
-
-	[Range(5, 20)]
-	public int PossessionSpellPower;
-
-	[Range(5, 20)]
-	public int PossessionSpellCost;
-
-	public float ManaRegenerationPerSecond;
+	public Spell CurrentSpell;
 
 	[Range(0, 100)]
 	public float MaxMana;
@@ -28,22 +14,18 @@ public class MageController : MonoBehaviour
 	[Range(0, 100)]
 	public float CurrentMana;
 
+	//Meditate Spell
+	public float ManaRegenerationPerSecond;
+
+	#region UI
 	public Slider ManaBar;
 	private Image manaBarFillImage;
 	private Color manaBarFillImageOriginalColor;
-
-	public Spells SelectedSpell = Spells.Possession;
-
-	public Transform VortexCenter;
-
-	[Range(1, 20)]
-	public int VortexSpeed;
-
-	public float VertexSpellCostPerSecond;
+	#endregion
 
 	public void Start()
 	{
-		SelectedSpell = Spells.Possession;
+		SelectSpell(GameManager.Instance.Spells[0]); ;
 
 		if (ManaBar != null)
 		{
@@ -52,33 +34,37 @@ public class MageController : MonoBehaviour
 		}
 	}
 
-	public void Update()
+	public void SelectSpell(Spell spell)
 	{
-		RegenerateMana();
-		PayForActiveSpell();
-		HandleInputs();
-		UpdateUi();
+		if (CurrentSpell != null)
+		{
+			CurrentSpell.OnDeactivated();
+		}
+
+		CurrentSpell = spell;
+		CurrentSpell.OnActivated(this);
 	}
 
-	private void PayForActiveSpell()
+	public void Update()
 	{
-		if (SelectedSpell == Spells.Vortex)
+		if (CurrentSpell != null)
 		{
-			var realVertexCost = VertexSpellCostPerSecond * Time.deltaTime;
-			if (CurrentMana < realVertexCost)
+			if (!CurrentSpell.PayWhileActive())
 			{
-				SelectedSpell = Spells.Possession;
-				if (VortexCenter != null)
-				{
-					StartCoroutine(CloseVortex());
-				}
-
-				StartCoroutine(BlinkManaBar(Color.red));
-				return;
+				SelectSpell(null);
 			}
-
-			CurrentMana -= realVertexCost;
+			else
+			{
+				CurrentSpell.OnUpdate();
+				CurrentSpell.OnHandleInputs();
+			}
 		}
+
+		//Move to meditate ?
+		RegenerateMana();
+
+		HandleChangeSelectedSpell();
+		UpdateUi();
 	}
 
 	private void RegenerateMana()
@@ -98,150 +84,18 @@ public class MageController : MonoBehaviour
 		}
 	}
 
-	private void HandleInputs()
-	{
-		HandleChangeSelectedSpell();
-		if (SelectedSpell == Spells.Possession)
-		{
-			HandlePossessionSpell();
-			return;
-		}
-
-		if (SelectedSpell == Spells.Vortex)
-		{
-			HandleVortexSpell();
-			return;
-		}
-	}
-
 	private void HandleChangeSelectedSpell()
 	{
-		if (Input.GetKeyDown(KeyCode.Space))
+		foreach (var spell in GameManager.Instance.Spells)
 		{
-			if (SelectedSpell == Spells.Possession)
-				SelectedSpell = Spells.Vortex;
-			else
-				SelectedSpell = Spells.Possession;
-
-
-			if (VortexCenter != null)
+			if (Input.GetKeyDown(spell.ActivationCode))
 			{
-				if (SelectedSpell == Spells.Vortex)
-				{
-					VortexCenter.gameObject.SetActive(true);
-					VortexCenter.GetComponent<Animator>().Play("Appear");
-				}
-				else
-				{
-					StartCoroutine(CloseVortex());
-				}
+				SelectSpell(spell);
 			}
 		}
 	}
 
-	private void HandlePossessionSpell()
-	{
-		if (SelectedCrate == null)
-		{
-			return;
-		}
-
-		if (Input.GetKeyDown(KeyCode.UpArrow))
-		{
-			CastPossessionSpell(Vector2.up);
-		}
-
-		if (Input.GetKeyDown(KeyCode.DownArrow))
-		{
-			CastPossessionSpell(Vector2.down);
-		}
-
-		if (Input.GetKeyDown(KeyCode.LeftArrow))
-		{
-			CastPossessionSpell(Vector2.left);
-		}
-
-		if (Input.GetKeyDown(KeyCode.RightArrow))
-		{
-			CastPossessionSpell(Vector2.right);
-		}
-	}
-
-	private void HandleVortexSpell()
-	{
-		if (Input.GetKey(KeyCode.UpArrow))
-		{
-			CastVortexSpell(Vector2.up);
-		}
-
-		if (Input.GetKey(KeyCode.DownArrow))
-		{
-			CastVortexSpell(Vector2.down);
-		}
-
-		if (Input.GetKey(KeyCode.LeftArrow))
-		{
-			CastVortexSpell(Vector2.left);
-		}
-
-		if (Input.GetKey(KeyCode.RightArrow))
-		{
-			CastVortexSpell(Vector2.right);
-		}
-	}
-
-	private void CastPossessionSpell(Vector2 direction)
-	{
-		if (CurrentMana < PossessionSpellCost)
-		{
-			StartCoroutine(BlinkManaBar(Color.red));
-			return;
-		}
-
-		SelectedCrate.AddForce(direction * PossessionSpellPower, ForceMode2D.Impulse);
-		CurrentMana -= PossessionSpellCost;
-	}
-
-	private void CastVortexSpell(Vector2 vector2)
-	{
-		if (VortexCenter == null)
-		{
-			return;
-		}
-
-		vector2 = vector2 * Time.deltaTime * VortexSpeed;
-		VortexCenter.position = new Vector3(
-			VortexCenter.position.x + vector2.x,
-			VortexCenter.position.y + vector2.y,
-			VortexCenter.position.z);
-	}
-
-	/// <summary>
-	/// Wait for the end of the vortex animation than disable the Vortex
-	/// </summary>
-	/// <returns></returns>
-	private IEnumerator CloseVortex()
-	{
-		if (VortexCenter == null)
-		{
-			yield break;
-		}
-
-		var animator = VortexCenter.GetComponent<Animator>();
-		animator.Play("Disappear");
-
-		// Length is always 0
-		//var clipInfo = animator.GetCurrentAnimatorClipInfo(0);
-		//yield return new WaitForSeconds(clipInfo.Length);
-
-		int numberOfAsepriteFrame = 6;
-		float asepriteFrameTime = 60f / 1000f;
-		yield return new WaitForSeconds((float)numberOfAsepriteFrame * asepriteFrameTime);
-		
-		VortexCenter.gameObject.SetActive(false);
-	}
-
-	private IEnumerator BlinkManaBar(Color color)
+	public IEnumerator BlinkManaBar(Color color)
 	{
 		manaBarFillImage.color = color;
 
