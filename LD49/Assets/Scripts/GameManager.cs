@@ -59,15 +59,27 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 	public GameObject PoofPrefab;
 	public Transform PoofPlaceholder;
 
+	public Transform ManaBubblePlaceholder;
+	public GameObject ManaBubblePrefab;
+	public SpriteRenderer ManaBubbleBoundariesSprite;
+
 	public void Start()
 	{
+		var bubbleBounds = ManaBubbleBoundariesSprite.bounds;
+
 		Spells = new List<Spell>
 		{
 			new MeditateSpell {
 				ActivationCode = KeyCode.Alpha1,
 				DisplayName = "Meditate",
 				Icon = SpellIconMeditate,
-				ManaCost = -5,
+				ManaCost = -2,
+				EmissionCount = new RangeInt(0,1),
+				Frequency = 0.6f,
+				RandomRotation = true,
+				RandomScale = true,
+				RandomScaleRange =  new Vector2(0.4f, 0.8f),
+				WorldPossitionBoundaries = bubbleBounds
 			},
 			new ForcePushSpell {
 				ActivationCode = KeyCode.Alpha2,
@@ -139,6 +151,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
 		return flotingText;
 	}
+
 	public void SpawnPoofAnim(Vector3 worldPosisition)
 	{
 		StartCoroutine(SpawnPoofAnimCoroutine(worldPosisition));
@@ -164,6 +177,16 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 		Destroy(poofAnim);
 	}
 
+	public GameObject SpawnBubble(Vector3 worldPosisition)
+	{
+		var bubble = Instantiate(ManaBubblePrefab, ManaBubblePlaceholder);
+		bubble.transform.localPosition = new Vector3(
+			worldPosisition.x,
+			worldPosisition.y,
+			worldPosisition.z);
+
+		return bubble;
+	}
 
 	private void BuildSpellListUi()
 	{

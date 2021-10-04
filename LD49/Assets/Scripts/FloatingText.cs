@@ -15,15 +15,24 @@ public class FloatingText : MonoBehaviour
 
     public Image Image;
 
+    public AnimationCurve XAnimationCurveOverLifetime;
+
 	public void Start()
 	{
         BirthTime = Time.time;
 	}
 
-	public void Update()
+	public void FixedUpdate()
     {
+        var speedx = Speed.x;
+        if (XAnimationCurveOverLifetime != null)
+        {
+            var percent = (Time.time - BirthTime) / LifeTime;
+            speedx = speedx * XAnimationCurveOverLifetime.Evaluate(percent);
+        }
+
         transform.localPosition = new Vector3(
-            transform.localPosition.x + Speed.x * Time.deltaTime,
+            transform.localPosition.x + speedx * Time.deltaTime,
             transform.localPosition.y + Speed.y * Time.deltaTime,
             transform.localPosition.z);
 
