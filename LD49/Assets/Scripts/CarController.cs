@@ -8,11 +8,11 @@ public class CarController : MonoBehaviour
 {
     public Car Car;
 
-    public List<GameObject> StoredCrate = new List<GameObject>();
+    public List<GameObject> StoredCargos = new List<GameObject>();
 
     public void OnTriggerEnter2D(Collider2D collider)
 	{
-		if (StoredCrate.Contains(collider.gameObject))
+		if (StoredCargos.Contains(collider.gameObject))
 		{
 			return;
 		}
@@ -28,17 +28,17 @@ public class CarController : MonoBehaviour
 			return;
 		}
 
-		StoredCrate.Add(collider.gameObject);
+		StoredCargos.Add(collider.gameObject);
 		GameManager.Instance.Score += Car.ScorePerCargo;
 		GameManager.Instance.SpawnFloatingText(collider.gameObject.transform.localPosition, Color.green, "+" + Car.ScorePerCargo);
 	}
 
 	public void OnTriggerExit2D(Collider2D collider)
     {
-        if (StoredCrate.Contains(collider.gameObject))
+        if (StoredCargos.Contains(collider.gameObject))
 		{
 			var cargoController = collider.gameObject.GetComponent<CargoController>();
-			StoredCrate.Remove(collider.gameObject);
+			StoredCargos.Remove(collider.gameObject);
 
 			if (cargoController.IsDestroyed)
 			{

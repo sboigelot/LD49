@@ -299,14 +299,8 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 		
 		SpawnLocomotive(train, newTrain);
 
-		for (int i = 0; i < train.Cars.Count; i++)
-		{
-			Car car = train.Cars[i];
-
-			SpawnCar(car, i, newTrain);
-		}
-
 		var trainController = newTrain.GetComponent<TrainController>();
+		trainController.Cars = new List<CarController>();
 		trainController.Speed = train.Speed;
 		var halfSizeOfScreenInUnityUnit = 35;
 		trainController.DestroyXLocation = (train.Cars.Count + 1) * CarDisplacement.x + halfSizeOfScreenInUnityUnit;
@@ -314,6 +308,14 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 		var rigidBody = newTrain.GetComponent<Rigidbody2D>();
 		rigidBody.bodyType = RigidbodyType2D.Kinematic;
 		rigidBody.gravityScale = 0f;
+
+		for (int i = 0; i < train.Cars.Count; i++)
+		{
+			Car car = train.Cars[i];
+
+			var carController = SpawnCar(car, i, newTrain);
+			trainController.Cars.Add(carController);
+		}
 	}
 
 	private void SpawnLocomotive(Train train, GameObject newTrain)
@@ -325,7 +327,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 			newTrain.transform.transform.position.z);
 	}
 
-	private void SpawnCar(Car car, int i, GameObject newTrain)
+	private CarController SpawnCar(Car car, int i, GameObject newTrain)
 	{
 		var newCar = Instantiate(car.CarPrefab, newTrain.transform);
 
@@ -334,6 +336,9 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 			newTrain.transform.transform.position.y - CarDisplacement.y,
 			newTrain.transform.transform.position.z);
 
-		newCar.GetComponent<CarController>().Car = car;
+		var controller = newCar.GetComponent<CarController>();
+		controller.Car = car;
+
+		return controller;
 	}
 }
