@@ -25,6 +25,7 @@ public class ManaBubbleController : FloatingText
 
 	public void OnClick()
 	{
+		SoundFxLibrary.PlayRandom(SoundFxLibrary.Instance.BubblePop, true);
 		int scaledBonus = (int)Math.Round(ManaBonus * transform.localScale.x);
 		GameManager.Instance.SpawnFloatingText(transform.localPosition, Color.magenta, "+" + scaledBonus);
 		

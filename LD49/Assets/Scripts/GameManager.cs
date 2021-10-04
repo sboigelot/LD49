@@ -275,8 +275,11 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 				PendingTrains.RemoveAt(0);
 				if (!PendingTrains.Any())
 				{
+					SoundFxLibrary.PlayRandom(SoundFxLibrary.Instance.LastTrain, true);
 					SpawnAutoScalingText(AutoScalingTextLastTrain);
 				}
+				SoundFxLibrary.PlayRandom(SoundFxLibrary.Instance.TrainRun, true);
+				SoundFxLibrary.PlayRandom(SoundFxLibrary.Instance.TrainWhisle, true);
 			}
 		}
 
@@ -297,11 +300,14 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 			case WorldEventType.Tilt:
 				var intensity = worldEvent.Intensity.z;
 				TiltWorld(intensity);
+
+				//SoundFxLibrary.PlayRandom(SoundFxLibrary.Instance.BubblePop, true);
 				SpawnAutoScalingText(AutoScalingTextWorldTilted);
 				break;
 
 			case WorldEventType.Gravity:
 				ChangeGravity(worldEvent.Intensity);
+				SoundFxLibrary.PlayRandom(SoundFxLibrary.Instance.EventGravity, true);
 				SpawnAutoScalingText(AutoScalingTextGravityChanged);
 				break;
 
@@ -336,9 +342,12 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 	{
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			var mainMenu = Instantiate(MainMenuScreenPrefab, ScreenPlaceholder);
-			mainMenu.GetComponent<MainMenuScreen>().IsOverlay = true;
-			Time.timeScale = 0;
+			if (ScreenPlaceholder.transform.childCount == 0)
+			{
+				var mainMenu = Instantiate(MainMenuScreenPrefab, ScreenPlaceholder);
+				mainMenu.GetComponent<MainMenuScreen>().IsOverlay = true;
+				Time.timeScale = 0;
+			}
 		}
 	}
 

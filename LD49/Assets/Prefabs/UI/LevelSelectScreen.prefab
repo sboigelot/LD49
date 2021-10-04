@@ -166,7 +166,6 @@ MonoBehaviour:
   LevelButtonGrid: {fileID: 1381170272820958480}
   LevelButtonPrefab: {fileID: 1112208548098473214, guid: 21cea5d464640bf4aa9013d5de635432, type: 3}
   Levels:
-  - {fileID: 11400000, guid: 997f77ac56002c14ca05cefe79164b53, type: 2}
   - {fileID: 11400000, guid: 4a34e20d73168f24bbdc362b7753c522, type: 2}
   - {fileID: 11400000, guid: 0bc28085bfdd04a45bfc72f99e67cad8, type: 2}
 --- !u!1 &1381170272820958495

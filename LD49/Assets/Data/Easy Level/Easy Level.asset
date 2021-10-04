@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91111f3080bc5e84fbae40249c1e7099, type: 3}
   m_Name: Easy Level
   m_EditorClassIdentifier: 
-  DisplayName: Train Training
+  DisplayName: Tutorial
   Image: {fileID: -6974998258513485810, guid: 831ff706cc8e6b149a4ad30c7c75261d, type: 3}
   Order: 1
   Trains:

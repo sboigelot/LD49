@@ -12,7 +12,26 @@ public class SoundFxLibrary : MonoBehaviour
 
     public AudioClip AudioClipClick;
     
-    public AudioClip[] AudioClipRandomSample;
+    public AudioClip[] BrakeBarrel;
+    public AudioClip[] BrakeCargo;
+    public AudioClip[] BreakBag;
+    public AudioClip[] CollideBag;
+    public AudioClip[] CollideBarrel;
+    public AudioClip[] CollideCrate;
+    public AudioClip[] BubblePop;
+    public AudioClip[] EventGravity;
+    public AudioClip[] TrainWhisle;
+    public AudioClip[] LastTrain;
+    public AudioClip[] ForcePush;
+    public AudioClip[] Vortex;
+
+    public AudioClip[] TrainRun;
+
+    public AudioClip[] pop;
+    public AudioClip[] UIClick;
+
+    public AudioSource[] AudioSources;
+    public int AudioSourceIndex = -1;
 
     private void Start() 
     {
@@ -25,12 +44,12 @@ public class SoundFxLibrary : MonoBehaviour
         PlaySound(Instance.AudioClipClick);
     }
 
-    public static void PlayRandomSoundExample()
+    public static void PlayRandom(AudioClip[] audioClipRandomSample, bool secondary = false)
     {
-        PlaySound(Instance.AudioClipRandomSample[UnityEngine.Random.Range(0, Instance.AudioClipRandomSample.Length)], true);
+        PlaySound(audioClipRandomSample[Random.Range(0, audioClipRandomSample.Length)], secondary);
     }
 
-    public static void PlaySound(AudioClip sound, bool secondary = false)
+    public static void PlaySound( AudioClip sound, bool secondary = false)
     {        
         if(sound == null)
         {
@@ -38,7 +57,10 @@ public class SoundFxLibrary : MonoBehaviour
             return;
         }
 
-        var audioSource = secondary ? Instance.SecondaryAudioSource : Instance.AudioSource;
+        Instance.AudioSourceIndex = (Instance.AudioSourceIndex+1) % (Instance.AudioSources.Length-1);
+
+        var audioSource = Instance.AudioSources[Instance.AudioSourceIndex];
+        //var audioSource = secondary ? Instance.SecondaryAudioSource : Instance.AudioSource;
         audioSource.loop = false;
         audioSource.Stop();
         audioSource.clip = sound;

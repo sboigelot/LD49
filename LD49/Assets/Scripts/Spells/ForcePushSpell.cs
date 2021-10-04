@@ -108,6 +108,7 @@ public class ForcePushSpell : Spell
 			return;
 		}
 
+		SoundFxLibrary.PlayRandom(SoundFxLibrary.Instance.ForcePush, true);
 		NearestCargo.gameObject.GetComponent<Rigidbody2D>().AddForce(direction * ForcePower, ForceMode2D.Impulse);
 
 		GameManager.Instance.StartCoroutine(ShowForcePush(NearestCargo.gameObject, animRotation));

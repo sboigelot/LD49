@@ -17,6 +17,7 @@ public class VortexSpell : Spell
 
 		base.OnActivated(mage);
 
+		SoundFxLibrary.PlayRandom(SoundFxLibrary.Instance.Vortex, true);
 		vortexCenter = GameManager.Instance.VortexCenter;
 		vortexCenter.gameObject.SetActive(true);
 		vortexCenter.GetComponent<Animator>().Play("Appear");
