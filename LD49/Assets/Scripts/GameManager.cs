@@ -280,10 +280,10 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
 	private void HandleDebugInput()
 	{
-		if (Input.GetKeyDown(KeyCode.Keypad5))
-		{
-			SpawnCrate(null);
-		}
+		//if (Input.GetKeyDown(KeyCode.Keypad5))
+		//{
+		//	SpawnCrate(null);
+		//}
 	}
 
 	public void SpawnCrate(Cargo cargo)

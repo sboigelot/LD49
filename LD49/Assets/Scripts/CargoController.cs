@@ -8,11 +8,24 @@ public class CargoController : MonoBehaviour
 
     public float HitPoint;
 
+    private float initialHp;
+
+    public SpriteRenderer MainSpriteRenderer;
+
     public GameObject SelectionSprite;
+
+    public Sprite BrokenSprite;
 
     public CargoType CargoType;
 
     public bool IsDestroyed;
+
+    public bool IsBroken;
+
+	public void Start()
+	{
+        initialHp = HitPoint;
+	}
 
 	void Update()
     {
@@ -24,9 +37,18 @@ public class CargoController : MonoBehaviour
         var force = collision2D.relativeVelocity;
 
         HitPoint -= force.magnitude;
+
+        if (!IsBroken && HitPoint <= initialHp / 2)
+        {
+            IsBroken = true;
+            MainSpriteRenderer.sprite = BrokenSprite;
+            GameManager.Instance.SpawnFloatingText(transform.position, Color.yellow, "Be carefull!");
+        }
+
         if (HitPoint <= 0)
         {
             //TODO Spawn Explosion Effect
+            GameManager.Instance.SpawnFloatingText(transform.position, Color.yellow, "Big bada boum");
             Destroy(gameObject);
         }
     }

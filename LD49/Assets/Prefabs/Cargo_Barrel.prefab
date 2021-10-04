@@ -69,9 +69,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsSelected: 0
-  HitPoint: 300
+  HitPoint: 160
+  MainSpriteRenderer: {fileID: 2881434434102640825}
   SelectionSprite: {fileID: 9121530467845870896}
+  BrokenSprite: {fileID: 21300000, guid: f3081601e84efd8478fbe18e7dd2f6fe, type: 3}
   CargoType: 2
+  IsDestroyed: 0
+  IsBroken: 0
 --- !u!212 &2881434434102640825
 SpriteRenderer:
   m_ObjectHideFlags: 0
