@@ -79,7 +79,8 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 				RandomRotation = true,
 				RandomScale = true,
 				RandomScaleRange =  new Vector2(0.4f, 0.8f),
-				WorldPossitionBoundaries = bubbleBounds
+				WorldPossitionBoundaries = bubbleBounds,
+				UseWasd = false
 			},
 			new ForcePushSpell {
 				ActivationCode = KeyCode.Alpha2,
@@ -87,20 +88,23 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 				Icon = SpellIconForcePursh,
 				ForcePower = 8,
 				ManaCost = 20,
-				ForcePushAnim = ForcePushAnim
+				ForcePushAnim = ForcePushAnim,
+				UseWasd = true
 			},
 			new VortexSpell {
 				ActivationCode = KeyCode.Alpha3,
 				DisplayName = "Vortex",
 				Icon = SpellIconVortex,
 				ManaCost = 15,
+				UseWasd = false
 			},
 			new WorldImpactSpell{
 				ActivationCode = KeyCode.Alpha4,
 				DisplayName = "World Impact",
 				Icon = SpellIconWorldImpact,
 				ManaCost = 25,
-				Intensity = new Vector3(0,3,5)
+				Intensity = new Vector3(0,3,5),
+				UseWasd = true
 			},
 		};
 

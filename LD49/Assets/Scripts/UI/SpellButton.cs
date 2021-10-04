@@ -20,6 +20,12 @@ public class SpellButton : MonoBehaviour
 
 	public Text KeyCodeText;
 
+	public GameObject SelectionKeyCap;
+
+	public GameObject WasdKeyCaps;
+
+	public GameObject MouseIcon;
+
 	public void ReBuild()
 	{
 		if (Spell == null)
@@ -34,14 +40,28 @@ public class SpellButton : MonoBehaviour
 
 	public void Update()
 	{
-		if (SelectionHighlight == null)
+		bool isCurrentSpell = MageController.Instance.CurrentSpell == Spell;
+
+		if (SelectionKeyCap != null)
 		{
-			return;
+			SelectionKeyCap.SetActive(!isCurrentSpell);
 		}
 
-		SelectionHighlight.color = MageController.Instance.CurrentSpell == Spell ?
-			SelectedColor : 
-			NotSelectedColor;
+		if (WasdKeyCaps != null)
+		{
+			WasdKeyCaps.SetActive(isCurrentSpell && Spell.UseWasd);
+		}
+
+		if (MouseIcon != null)
+		{
+			MouseIcon.SetActive(isCurrentSpell);
+		}
+
+		if (SelectionHighlight != null)
+		{
+			SelectionHighlight.color =  isCurrentSpell ? SelectedColor : NotSelectedColor;
+		}
+
 	}
 
 	public void SelectSpell()

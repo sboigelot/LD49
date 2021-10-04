@@ -18,6 +18,8 @@ public abstract class Spell
 
 	protected MageController Mage;
 
+	public bool UseWasd;
+
 	public virtual void OnActivated(MageController mage)
 	{
 		Mage = mage;
