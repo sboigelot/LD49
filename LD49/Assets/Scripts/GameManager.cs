@@ -114,8 +114,6 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 		};
 
 		BuildSpellListUi();
-
-		Time.timeScale = 1f;
 		SelectLevel(GameInfo.CurrentLevel);
 	}
 
