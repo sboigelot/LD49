@@ -51,6 +51,9 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
 	public GameObject EndLevelScreenPrefab;
 
+	public ClockController Clock;
+	public TiltGadgetController TiltGadget;
+
 	public void Start()
 	{
 		Spells = new List<Spell>
@@ -166,6 +169,8 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 		pendingCargos = new List<Cargo>(CurrentLevel.Cargos).OrderBy(t => t.SpawnTimeInSecond).ToList();
 		pendingTrains = new List<Train>(CurrentLevel.Trains).OrderBy(t => t.SpawnTimeInSecond).ToList();
 		pendingWorldEvents = new List<WorldEvent>(CurrentLevel.WorldEvents).OrderBy(t => t.SpawnTimeInSecond).ToList();
+
+		Clock.DurationInSecond = pendingWorldEvents.Last().SpawnTimeInSecond;
 	}
 
 	public void Update()
@@ -248,6 +253,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 	public void TiltWorld(float intensity)
 	{
 		TrainStation.Rotate(new Vector3(0, 0, intensity));
+		TiltGadget.UpdateTilt(TrainStation.transform.rotation.z);
 	}
 
 	private void HandleInput()
