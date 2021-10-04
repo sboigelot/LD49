@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 228d074a14368ec47aaf78cb1ebf2cef, type: 3}
   m_Name: Train 2
   m_EditorClassIdentifier: 
-  SpawnTimeInSecond: 60
+  SpawnTimeInSecond: 35
   Speed: 8
   Cars:
   - {fileID: 11400000, guid: 4200d5364a936cf40bb507287939f355, type: 2}

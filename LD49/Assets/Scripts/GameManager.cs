@@ -19,9 +19,9 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
 	public Level CurrentLevel;
 
-	private List<Cargo> pendingCargos;
-	private List<Train> pendingTrains;
-	private List<WorldEvent> pendingWorldEvents;
+	public List<Cargo> PendingCargos;
+	public List<Train> PendingTrains;
+	public List<WorldEvent> PendingWorldEvents;
 
 	public Text TimerText;
 
@@ -166,11 +166,12 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 			CurrentLevel = DebugLevel;
 		}		
 
-		pendingCargos = new List<Cargo>(CurrentLevel.Cargos).OrderBy(t => t.SpawnTimeInSecond).ToList();
-		pendingTrains = new List<Train>(CurrentLevel.Trains).OrderBy(t => t.SpawnTimeInSecond).ToList();
-		pendingWorldEvents = new List<WorldEvent>(CurrentLevel.WorldEvents).OrderBy(t => t.SpawnTimeInSecond).ToList();
+		PendingCargos = new List<Cargo>(CurrentLevel.Cargos).OrderBy(t => t.SpawnTimeInSecond).ToList();
+		PendingTrains = new List<Train>(CurrentLevel.Trains).OrderBy(t => t.SpawnTimeInSecond).ToList();
+		PendingWorldEvents = new List<WorldEvent>(CurrentLevel.WorldEvents).OrderBy(t => t.SpawnTimeInSecond).ToList();
 
-		Clock.DurationInSecond = pendingWorldEvents.Last().SpawnTimeInSecond;
+		Clock.DurationInSecond = PendingWorldEvents.Last().SpawnTimeInSecond;
+		Clock.RebuildClockExtrusions();
 	}
 
 	public void Update()
@@ -188,30 +189,30 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 		HandleDebugInput();
 		HandleInput();
 
-		if (pendingCargos.Any())
+		if (PendingCargos.Any())
 		{
-			if (pendingCargos[0].SpawnTimeInSecond <= Time.timeSinceLevelLoad)
+			if (PendingCargos[0].SpawnTimeInSecond <= Time.timeSinceLevelLoad)
 			{
-				SpawnCrate(pendingCargos[0]);
-				pendingCargos.RemoveAt(0);
+				SpawnCrate(PendingCargos[0]);
+				PendingCargos.RemoveAt(0);
 			}
 		}
 
-		if (pendingTrains.Any())
+		if (PendingTrains.Any())
 		{
-			if (pendingTrains[0].SpawnTimeInSecond <= Time.timeSinceLevelLoad)
+			if (PendingTrains[0].SpawnTimeInSecond <= Time.timeSinceLevelLoad)
 			{
-				SpawnTrain(pendingTrains[0]);
-				pendingTrains.RemoveAt(0);
+				SpawnTrain(PendingTrains[0]);
+				PendingTrains.RemoveAt(0);
 			}
 		}
 
-		if (pendingWorldEvents.Any())
+		if (PendingWorldEvents.Any())
 		{
-			if (pendingWorldEvents[0].SpawnTimeInSecond <= Time.timeSinceLevelLoad)
+			if (PendingWorldEvents[0].SpawnTimeInSecond <= Time.timeSinceLevelLoad)
 			{
-				TriggerWorldEvent(pendingWorldEvents[0]);
-				pendingWorldEvents.RemoveAt(0);
+				TriggerWorldEvent(PendingWorldEvents[0]);
+				PendingWorldEvents.RemoveAt(0);
 			}
 		}
 	}
