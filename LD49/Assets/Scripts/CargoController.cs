@@ -47,8 +47,7 @@ public class CargoController : MonoBehaviour
 
         if (HitPoint <= 0)
         {
-            //TODO Spawn Explosion Effect
-            GameManager.Instance.SpawnFloatingText(transform.position, Color.yellow, "Big bada boum");
+            GameManager.Instance.SpawnPoofAnim(transform.position);
             Destroy(gameObject);
         }
     }

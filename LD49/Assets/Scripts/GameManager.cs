@@ -56,6 +56,9 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
 	public GameObject ForcePushAnim;
 
+	public GameObject PoofPrefab;
+	public Transform PoofPlaceholder;
+
 	public void Start()
 	{
 		Spells = new List<Spell>
@@ -136,6 +139,31 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
 		return flotingText;
 	}
+	public void SpawnPoofAnim(Vector3 worldPosisition)
+	{
+		StartCoroutine(SpawnPoofAnimCoroutine(worldPosisition));
+	}
+
+	private IEnumerator SpawnPoofAnimCoroutine(Vector3 worldPosisition)
+	{
+		if (PoofPlaceholder == null)
+		{
+			yield break;
+		}
+
+		var poofAnim = Instantiate(PoofPrefab, PoofPlaceholder);
+		poofAnim.transform.localPosition = new Vector3(
+			worldPosisition.x,
+			worldPosisition.y,
+			worldPosisition.z);
+
+		int numberOfAsepriteFrame = 8;
+		float asepriteFrameTime = 60f / 1000f;
+		yield return new WaitForSeconds((float)numberOfAsepriteFrame * asepriteFrameTime);
+
+		Destroy(poofAnim);
+	}
+
 
 	private void BuildSpellListUi()
 	{
