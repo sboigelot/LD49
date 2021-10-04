@@ -6,12 +6,15 @@ using UnityEngine.UI;
 
 public class VortexSpell : Spell
 {
-	public float ManaCostPerSecond;
-
 	private Transform vortexCenter;
 
 	public override void OnActivated(MageController mage)
 	{
+		if (IsActive == true)
+		{
+			return;
+		}
+
 		base.OnActivated(mage);
 
 		vortexCenter = GameManager.Instance.VortexCenter;
@@ -53,7 +56,7 @@ public class VortexSpell : Spell
 
 	public override bool PayWhileActive()
 	{
-		var realVortexCost = ManaCostPerSecond * Time.deltaTime;
+		var realVortexCost = ManaCost * Time.deltaTime;
 		if (Mage.CurrentMana < realVortexCost)
 		{
 			return false;
@@ -61,6 +64,15 @@ public class VortexSpell : Spell
 
 		Mage.CurrentMana -= realVortexCost;
 		return true;
+	}
+
+	public override void OnHandleInputs()
+	{
+		base.OnHandleInputs();
+		if (Input.GetMouseButtonDown(0))
+		{
+			MageController.Instance.SelectSpell(GameManager.Instance.Spells[0]);
+		}
 	}
 
 	public override void OnUpdate()

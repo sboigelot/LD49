@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91111f3080bc5e84fbae40249c1e7099, type: 3}
+  m_Name: Easy Level
+  m_EditorClassIdentifier: 
+  DisplayName: Train Training
+  Image: {fileID: -6974998258513485810, guid: 831ff706cc8e6b149a4ad30c7c75261d, type: 3}
+  Order: 1
+  Trains:
+  - {fileID: 11400000, guid: 2b6deabdffb7a774882566babf596582, type: 2}
+  - {fileID: 11400000, guid: 77b4560db2f0a58418f761cb57e09c3a, type: 2}
+  - {fileID: 11400000, guid: d64364c9db6872a4fae5079d01f94fb7, type: 2}
+  - {fileID: 11400000, guid: 1c666ce9f6b914748a9311cc34fc6191, type: 2}
+  - {fileID: 11400000, guid: c9d3f33180a52fa4e96d95f87602d14f, type: 2}
+  Cargos:
+  - {fileID: 11400000, guid: d6ad917082426ae45bae2ec2a3087805, type: 2}
+  - {fileID: 11400000, guid: 291d8614c61067c4fb02722aab998aeb, type: 2}
+  - {fileID: 11400000, guid: 6218c9a9fb3101d41b35312366ffe78c, type: 2}
+  - {fileID: 11400000, guid: 6743282f0260deb4584865cb007a9652, type: 2}
+  - {fileID: 11400000, guid: 5ad69f10c5d12124baeb36e1be2f997f, type: 2}
+  - {fileID: 11400000, guid: 743ecaa3d75aa7149977889e4eb27179, type: 2}
+  - {fileID: 11400000, guid: 763620121c5e3a54fb825709e6ab262f, type: 2}
+  - {fileID: 11400000, guid: 5e82d8057816c1c41b4e99b6846668b0, type: 2}
+  - {fileID: 11400000, guid: fda828518c80c5743ba107c358bada62, type: 2}
+  - {fileID: 11400000, guid: 8f8a0f6bea325894c98f314f6a51ec5b, type: 2}
+  - {fileID: 11400000, guid: 8b6c7853bea3e23469a0245e6271280b, type: 2}
+  - {fileID: 11400000, guid: 4ce71550cfd60bd42ba00869eb907996, type: 2}
+  - {fileID: 11400000, guid: 4d03b30b45ee2f542af6d97c383635ab, type: 2}
+  - {fileID: 11400000, guid: 7baf2cbca6dfe3948b72c8c45b0bfc88, type: 2}
+  - {fileID: 11400000, guid: 3dbc40a113a3e59479162194f9007b0b, type: 2}
+  - {fileID: 11400000, guid: b9408940b482500498cf85e8c4af9715, type: 2}
+  - {fileID: 11400000, guid: adf8b096533a27e4687738ac07033de1, type: 2}
+  - {fileID: 11400000, guid: 14c37fd004539da489a3564b24d48a5e, type: 2}
+  - {fileID: 11400000, guid: e1d784bfd3bc8ac4989f27d585107a93, type: 2}
+  - {fileID: 11400000, guid: 8755844eff04f9b498dd21b13b8dc405, type: 2}
+  - {fileID: 11400000, guid: 26acb22bf856d304f948eaca0d59ddb7, type: 2}
+  - {fileID: 11400000, guid: f96a14dcfa16ac5458f5c7fce297aabe, type: 2}
+  - {fileID: 11400000, guid: 4b47a117b5ed7e3448a5f6f2598410f0, type: 2}
+  - {fileID: 11400000, guid: ae768f8b2715c6743a8837ca15b501a9, type: 2}
+  WorldEvents:
+  - {fileID: 11400000, guid: b54d2b578d1d3274f8e9c338a0aed99f, type: 2}
+  TargetScores: f4010000e8030000dc050000

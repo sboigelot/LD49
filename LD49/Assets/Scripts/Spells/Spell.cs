@@ -14,6 +14,8 @@ public abstract class Spell
 
 	public bool IsActive;
 
+	public int ManaCost;
+
 	protected MageController Mage;
 
 	public virtual void OnActivated(MageController mage)
@@ -24,6 +26,7 @@ public abstract class Spell
 
 	public virtual void OnDeactivated()
 	{
+		IsActive = false;
 	}
 
 	public virtual void OnHandleInputs()

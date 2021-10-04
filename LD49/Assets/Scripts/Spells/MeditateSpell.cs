@@ -2,8 +2,6 @@
 
 public class MeditateSpell : Spell
 {
-	public int ManaRegenPerSecond;
-
 	public override void OnUpdate()
 	{
 		RegenerateMana();
@@ -13,7 +11,7 @@ public class MeditateSpell : Spell
 	{
 		if (Mage.CurrentMana < Mage.MaxMana)
 		{
-			Mage.CurrentMana += (ManaRegenPerSecond * Time.deltaTime);
+			Mage.CurrentMana -= (ManaCost * Time.deltaTime);
 		}
 	}
 }

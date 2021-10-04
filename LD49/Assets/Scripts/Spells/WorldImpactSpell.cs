@@ -5,8 +5,6 @@ public class WorldImpactSpell : Spell
 {
 	public Vector3 Intensity;
 
-	public int ManaCost;
-
 	public override void OnHandleInputs()
 	{
 		if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))

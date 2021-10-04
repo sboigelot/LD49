@@ -18,6 +18,8 @@ public class SpellButton : MonoBehaviour
 
 	public Color NotSelectedColor;
 
+	public Text KeyCodeText;
+
 	public void ReBuild()
 	{
 		if (Spell == null)
@@ -27,6 +29,7 @@ public class SpellButton : MonoBehaviour
 
 		DisplayNameText.text = Spell.DisplayName;
 		Image.sprite = Spell.Icon;
+		KeyCodeText.text = Spell.ActivationCode.ToString().Replace("Alpha", "");
 	}
 
 	public void Update()

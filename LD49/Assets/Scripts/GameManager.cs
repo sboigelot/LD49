@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 				ActivationCode = KeyCode.Alpha1,
 				DisplayName = "Meditate",
 				Icon = SpellIconMeditate,
-				ManaRegenPerSecond = 50,
+				ManaCost = -5,
 			},
 			new ForcePushSpell {
 				ActivationCode = KeyCode.Alpha2,
@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 				ActivationCode = KeyCode.Alpha3,
 				DisplayName = "Vortex",
 				Icon = SpellIconVortex,
-				ManaCostPerSecond = 5,
+				ManaCost = 15,
 			},
 			new WorldImpactSpell{
 				ActivationCode = KeyCode.Alpha4,
@@ -187,7 +187,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
 		if (ScoreText != null)
 		{
-			ScoreText.text = "SCORE: " + Score;
+			ScoreText.text = "Score: " + Score;
 		}
 
 		HandleDebugInput();

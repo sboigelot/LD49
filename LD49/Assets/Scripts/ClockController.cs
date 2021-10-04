@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ClockController : MonoBehaviour
@@ -45,7 +46,7 @@ public class ClockController : MonoBehaviour
             ext.transform.Rotate(new Vector3(0f, 0f, -effectiveRotation));
         }
 
-        foreach (var worldEvent in GameManager.Instance.PendingWorldEvents)
+        foreach (var worldEvent in GameManager.Instance.PendingWorldEvents.Take(GameManager.Instance.PendingWorldEvents.Count - 1))
         {
             var ext = Instantiate(ClockExtrusionPrefab, ClockExtrusionPlaceholder);
             ext.GetComponent<SpriteRenderer>().sprite = SpriteClockExtrusionE;

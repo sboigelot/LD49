@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 228d074a14368ec47aaf78cb1ebf2cef, type: 3}
+  m_Name: Train 4 - Mix
+  m_EditorClassIdentifier: 
+  SpawnTimeInSecond: 75
+  Speed: 5
+  Cars:
+  - {fileID: 11400000, guid: 1c913339dcd948141ac5d5b7436d465f, type: 2}
+  - {fileID: 11400000, guid: 955848e908ea4084c8f7aa5b902b63ef, type: 2}
+  - {fileID: 11400000, guid: 0e71fc5f52d21e94fa91881788bf79ff, type: 2}
+  LocoPrefab: {fileID: 7549022998792803263, guid: 1e7b00042b431a542b3a96f775938629, type: 3}

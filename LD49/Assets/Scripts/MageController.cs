@@ -19,6 +19,7 @@ public class MageController : MonoBehaviourSingleton<MageController>
 	public Slider ManaBar;
 	private Image manaBarFillImage;
 	private Color manaBarFillImageOriginalColor;
+	public Slider SpellCostSlider;
 	#endregion
 
 	public void Start()
@@ -32,6 +33,11 @@ public class MageController : MonoBehaviourSingleton<MageController>
 
 	public void SelectSpell(Spell spell)
 	{
+		if (CurrentSpell == spell)
+		{
+			return;
+		}
+
 		if (CurrentSpell != null)
 		{
 			CurrentSpell.OnDeactivated();
@@ -47,7 +53,7 @@ public class MageController : MonoBehaviourSingleton<MageController>
 		{
 			if (!CurrentSpell.PayWhileActive())
 			{
-				SelectSpell(null);
+				SelectSpell(GameManager.Instance.Spells[0]);
 			}
 			else
 			{
@@ -75,11 +81,36 @@ public class MageController : MonoBehaviourSingleton<MageController>
 		{
 			ManaBar.maxValue = MaxMana;
 			ManaBar.value = CurrentMana;
+
+			if (SpellCostSlider != null)
+			{
+				if (CurrentSpell == null)
+				{
+					SpellCostSlider.gameObject.SetActive(false);
+					return;
+				}
+
+				SpellCostSlider.gameObject.SetActive(true);
+				SpellCostSlider.maxValue = CurrentMana;
+				SpellCostSlider.value = CurrentSpell.ManaCost;
+
+				var image = SpellCostSlider.gameObject.transform.GetChild(0).GetChild(0).GetComponent<Image>();
+				image.color = new Color(
+					image.color.r,
+					image.color.g,
+					image.color.b,
+					CurrentSpell.ManaCost < CurrentMana ? 0.65f : 1f);
+			}
 		}
 	}
 
 	private void HandleChangeSelectedSpell()
 	{
+		if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(1))
+		{
+			SelectSpell(GameManager.Instance.Spells[0]);
+		}
+
 		foreach (var spell in GameManager.Instance.Spells)
 		{
 			if (Input.GetKeyDown(spell.ActivationCode))

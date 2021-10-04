@@ -3,11 +3,7 @@ using UnityEngine;
 
 public class ForcePushSpell : Spell
 {
-	[Range(5, 20)]
 	public int ForcePower;
-
-	[Range(5, 20)]
-	public int ManaCost;
 
 	public CargoController NearestCargo;
 
