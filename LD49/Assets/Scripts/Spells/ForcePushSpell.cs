@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class ForcePushSpell : Spell
 {
@@ -9,6 +10,8 @@ public class ForcePushSpell : Spell
 	public int ManaCost;
 
 	public CargoController NearestCargo;
+
+	public GameObject ForcePushAnim;
 
 	public override void OnUpdate()
 	{		
@@ -68,26 +71,26 @@ public class ForcePushSpell : Spell
 
 		if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
 		{
-			ForcePush(Vector2.up);
+			ForcePush(Vector2.up, -90f);
 		}
 
 		if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
 		{
-			ForcePush(Vector2.down);
+			ForcePush(Vector2.down, 90f);
 		}
 
 		if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
 		{
-			ForcePush(Vector2.left);
+			ForcePush(Vector2.left, 0f);
 		}
 
 		if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
 		{
-			ForcePush(Vector2.right);
+			ForcePush(Vector2.right, 180f);
 		}
 	}
 
-	private void ForcePush(Vector2 direction)
+	private void ForcePush(Vector2 direction, float animRotation)
 	{
 		if (NearestCargo == null)
 		{
@@ -101,6 +104,31 @@ public class ForcePushSpell : Spell
 		}
 
 		NearestCargo.gameObject.GetComponent<Rigidbody2D>().AddForce(direction * ForcePower, ForceMode2D.Impulse);
+
+		GameManager.Instance.StartCoroutine(ShowForcePush(NearestCargo.gameObject, animRotation));
 		Mage.CurrentMana -= ManaCost;
+	}
+
+	private IEnumerator ShowForcePush(GameObject target, float animRotation)
+	{
+		if (ForcePushAnim == null)
+		{
+			yield break;
+		}
+
+		ForcePushAnim.gameObject.SetActive(true);
+		ForcePushAnim.transform.localPosition = new Vector3(
+			target.transform.localPosition.x,
+			target.transform.localPosition.y,
+			target.transform.localPosition.z);
+
+		ForcePushAnim.transform.rotation = Quaternion.identity;
+		ForcePushAnim.transform.Rotate(new Vector3(0f, 0f, animRotation));
+
+		int numberOfAsepriteFrame = 6;
+		float asepriteFrameTime = 60f / 1000f;
+		yield return new WaitForSeconds((float)numberOfAsepriteFrame * asepriteFrameTime);
+
+		ForcePushAnim.gameObject.SetActive(false);
 	}
 }

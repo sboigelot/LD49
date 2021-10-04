@@ -67,8 +67,6 @@ public class VortexSpell : Spell
 	{
 		base.OnUpdate();
 		MoveVotexCenterToMouseCursor();
-
-
 	}
 
 	private void MoveVotexCenterToMouseCursor()

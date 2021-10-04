@@ -25,6 +25,7 @@ public class CarController : MonoBehaviour
 
 		if (cargoController.CargoType != Car.DesiredCargoType)
 		{
+			GameManager.Instance.SpawnFloatingText(collider.gameObject.transform.localPosition, Color.red, "Wrong Cargo!");
 			return;
 		}
 

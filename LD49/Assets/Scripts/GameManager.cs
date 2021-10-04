@@ -54,6 +54,8 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 	public ClockController Clock;
 	public TiltGadgetController TiltGadget;
 
+	public GameObject ForcePushAnim;
+
 	public void Start()
 	{
 		Spells = new List<Spell>
@@ -69,7 +71,9 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 				DisplayName = "Force Push",
 				Icon = SpellIconForcePursh,
 				ForcePower = 8,
-				ManaCost = 20 },
+				ManaCost = 20,
+				ForcePushAnim = ForcePushAnim
+			},
 			new VortexSpell {
 				ActivationCode = KeyCode.Alpha3,
 				DisplayName = "Vortex",
