@@ -273,7 +273,10 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 			{
 				SpawnTrain(PendingTrains[0]);
 				PendingTrains.RemoveAt(0);
-				SpawnAutoScalingText(AutoScalingTextLastTrain);
+				if (!PendingTrains.Any())
+				{
+					SpawnAutoScalingText(AutoScalingTextLastTrain);
+				}
 			}
 		}
 
