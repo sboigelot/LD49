@@ -58,6 +58,15 @@ public class ForcePushSpell : Spell
 		NearestCargo.IsSelected = true;
 	}
 
+	public override bool PayWhileActive()
+	{
+		if (Mage.CurrentMana < ManaCost)
+		{
+			return false;
+		}
+		return true;
+	}
+
 	public override void OnHandleInputs()
 	{
 		if (NearestCargo == null)

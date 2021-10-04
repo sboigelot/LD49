@@ -63,6 +63,11 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 	public GameObject ManaBubblePrefab;
 	public SpriteRenderer ManaBubbleBoundariesSprite;
 
+	public Transform AutoScalingTextPlaceholder;
+	public GameObject AutoScalingTextGravityChanged;
+	public GameObject AutoScalingTextWorldTilted;
+	public GameObject AutoScalingTextLastTrain;
+
 	public void Start()
 	{
 		var bubbleBounds = ManaBubbleBoundariesSprite.bounds;
@@ -74,7 +79,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 				DisplayName = "Meditate",
 				Icon = SpellIconMeditate,
 				ManaCost = -2,
-				EmissionCount = new RangeInt(0,1),
+				EmissionCount = new RangeInt(0,2),
 				Frequency = 0.6f,
 				RandomRotation = true,
 				RandomScale = true,
@@ -87,7 +92,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 				DisplayName = "Force Push",
 				Icon = SpellIconForcePursh,
 				ForcePower = 8,
-				ManaCost = 20,
+				ManaCost = 16,
 				ForcePushAnim = ForcePushAnim,
 				UseWasd = true
 			},
@@ -159,6 +164,11 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 	public void SpawnPoofAnim(Vector3 worldPosisition)
 	{
 		StartCoroutine(SpawnPoofAnimCoroutine(worldPosisition));
+	}
+
+	public void SpawnAutoScalingText(GameObject AutoScalingTextPrefab)
+	{
+		Instantiate(AutoScalingTextPrefab, AutoScalingTextPlaceholder);
 	}
 
 	private IEnumerator SpawnPoofAnimCoroutine(Vector3 worldPosisition)
@@ -263,6 +273,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 			{
 				SpawnTrain(PendingTrains[0]);
 				PendingTrains.RemoveAt(0);
+				SpawnAutoScalingText(AutoScalingTextLastTrain);
 			}
 		}
 
@@ -283,10 +294,12 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 			case WorldEventType.Tilt:
 				var intensity = worldEvent.Intensity.z;
 				TiltWorld(intensity);
+				SpawnAutoScalingText(AutoScalingTextWorldTilted);
 				break;
 
 			case WorldEventType.Gravity:
 				ChangeGravity(worldEvent.Intensity);
+				SpawnAutoScalingText(AutoScalingTextGravityChanged);
 				break;
 
 			case WorldEventType.EndGame:

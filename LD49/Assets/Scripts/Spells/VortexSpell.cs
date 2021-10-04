@@ -26,11 +26,7 @@ public class VortexSpell : Spell
 	public override void OnDeactivated()
 	{
 		base.OnDeactivated();
-
-		Mage.StartCoroutine(CloseVortex());
-		
-		//StartCoroutine(BlinkManaBar(Color.red));
-		//return;
+		Mage.StartCoroutine(CloseVortex());		
 	}
 
 	private IEnumerator CloseVortex()

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level0
   m_EditorClassIdentifier: 
   DisplayName: Tutorial
-  Image: {fileID: 21300000, guid: 90eae770dfc033747aa89a8b09ba78c1, type: 3}
+  Image: {fileID: 21300000, guid: af32e6673db16f64e929c411d28e797e, type: 3}
   Order: 0
   Trains:
   - {fileID: 11400000, guid: 06ce8f0069c9ca94e88c0a52a70a4a7a, type: 2}

@@ -50,4 +50,13 @@ public class WorldImpactSpell : Spell
 
 		Mage.CurrentMana -= ManaCost;
 	}
+
+	public override bool PayWhileActive()
+	{
+		if (Mage.CurrentMana < ManaCost)
+		{
+			return false;
+		}
+		return true;
+	}
 }
