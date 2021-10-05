@@ -420,10 +420,10 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 	{
 		var newCar = Instantiate(car.CarPrefab, newTrain.transform);
 
-		newCar.transform.position = new Vector3(
-			newTrain.transform.transform.position.x - (i+1) * CarDisplacement.x,
-			newTrain.transform.transform.position.y - CarDisplacement.y,
-			newTrain.transform.transform.position.z);
+		newCar.transform.localPosition = new Vector3(
+			newTrain.transform.transform.localPosition.x - (i+1) * CarDisplacement.x,
+			newTrain.transform.transform.localPosition.y - CarDisplacement.y,
+			newTrain.transform.transform.localPosition.z);
 
 		var controller = newCar.GetComponent<CarController>();
 		controller.Car = car;

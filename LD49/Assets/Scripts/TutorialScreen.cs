@@ -9,6 +9,8 @@ public class TutorialScreen : MonoBehaviour
 
     public AudioClip VoiceOver;
 
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     public void Start()
     {
@@ -37,17 +39,27 @@ public class TutorialScreen : MonoBehaviour
             return;
         }
 
-        SoundFxLibrary.PlaySound(VoiceOver);
+        audioSource = SoundFxLibrary.PlaySound(VoiceOver);
     }
 
     public void Skip()
     {
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+
         gameObject.SetActive(false);
         Time.timeScale = 1f;
     }
 
     public void Next()
     {
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+
         gameObject.SetActive(false);
         if (!IsLast)
         {

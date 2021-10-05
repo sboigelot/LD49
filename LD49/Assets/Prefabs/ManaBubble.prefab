@@ -182,4 +182,4 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   SpriteRenderer: {fileID: 1551490619684095170}
-  ManaBonus: 10
+  ManaBonus: 15

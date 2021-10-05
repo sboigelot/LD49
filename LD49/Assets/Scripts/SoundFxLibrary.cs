@@ -44,17 +44,17 @@ public class SoundFxLibrary : MonoBehaviour
         PlaySound(Instance.AudioClipClick);
     }
 
-    public static void PlayRandom(AudioClip[] audioClipRandomSample, bool secondary = false)
+    public static AudioSource PlayRandom(AudioClip[] audioClipRandomSample, bool secondary = false)
     {
-        PlaySound(audioClipRandomSample[Random.Range(0, audioClipRandomSample.Length)], secondary);
+        return PlaySound(audioClipRandomSample[Random.Range(0, audioClipRandomSample.Length)], secondary);
     }
 
-    public static void PlaySound( AudioClip sound, bool secondary = false)
+    public static AudioSource PlaySound( AudioClip sound, bool secondary = false)
     {        
         if(sound == null)
         {
             Debug.LogWarning("Missing sound");
-            return;
+            return null;
         }
 
         Instance.AudioSourceIndex = (Instance.AudioSourceIndex+1) % (Instance.AudioSources.Length-1);
@@ -65,5 +65,7 @@ public class SoundFxLibrary : MonoBehaviour
         audioSource.Stop();
         audioSource.clip = sound;
         audioSource.Play();
+
+        return audioSource;
     }
 }
