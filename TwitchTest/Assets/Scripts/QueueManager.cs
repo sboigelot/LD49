@@ -29,6 +29,7 @@ using UnityEngine.UI;
 /// 
 /// !raffle						reset the current raffle
 /// !endraffle					choose the next player in the raffle
+/// !setopt [opt] [value]		set current stream option [opt] to [value]
 /// 
 /// </summary>
 public class QueueManager : MonoBehaviour
@@ -41,6 +42,7 @@ public class QueueManager : MonoBehaviour
 
 	public Transform NowPlayingPanel;
 	public QueueGirdItemController NowPlayingItem;
+	public Transform NowPlayingSeparator;
 	public GameObject QueueGridItemPrefab;
 	public Transform QueueGridPlaceholder;
 	public GameObject QueueClosedScreen;
@@ -54,30 +56,36 @@ public class QueueManager : MonoBehaviour
 
 	public List<GameJamSubmission> GameSubmissions;
 
+	[Header("Save/Load")]
 	public float SaveFrequency = 30f;
 	public float LastSaveGameTime = 0f;
 
+	[Header("Raffle")]
+	public GameObject RafflePanel;
+	public Text RaffleRemainingTimeText;
+	public Slider RaffleRemainingTimeSlider;
+	public Gradient RaffleRemainingTimeSliderColors;
 	public List<GameJamSubmission> RaffleParticipants;
 	public float RaffleDefaultDuration = 120f;
 	public float RaffleRemainingTime;
-	public Text RaffleRemainingTimeText;
 
 	public void RebuildUi()
 	{
 		QueueClosedScreen.SetActive(CurrentStream == null || !CurrentStream.IsOngoing);
 
 		NowPlayingPanel.gameObject.SetActive(CurrentGame != null);
+		NowPlayingSeparator.gameObject.SetActive(CurrentGame != null);
 		if (CurrentGame != null)
 		{
 			NowPlayingItem.Setup(true, 0, CurrentGame.ChatterTwitchName,
-				IsPriority(CurrentGame), CurrentGame.IsFollower);
+				IsPriority(CurrentGame), CurrentGame.IsFollower, false);
 		}
 		RebuildQueueGrid(false, RaffleParticipants != null);
 	}
 
 	public void RebuildQueueGrid(bool priority, bool raffleMode)
 	{
-		QueueRaffleText.text = !raffleMode ? "Submitted Games" : "Raffle - Type !join";
+		QueueRaffleText.text = !raffleMode ? "Submitted Games" : "The Raffle is open, type <b>!join</b> now!";
 		QueueGridPlaceholder.ClearChildren();
 
 		var query = raffleMode ?
@@ -88,21 +96,30 @@ public class QueueManager : MonoBehaviour
 				NextInLine(priority, true).
 				ToList();
 
-		int i = 0;
-		foreach (var submission in query.Take(11))
+		int numberOfSubToShow = CurrentGame != null ? 9 : 11;
+		foreach (var submission in query.Take(numberOfSubToShow))
 		{
-			i++;
 			var queueItem = Instantiate(QueueGridItemPrefab, QueueGridPlaceholder);
 			queueItem.GetComponent<QueueGirdItemController>().
-				Setup(false, submission.RafflePoints, submission.ChatterTwitchName, IsPriority(submission), submission.IsFollower);
+				Setup(false,
+				submission.RafflePoints,
+				submission.ChatterTwitchName,
+				IsPriority(submission),
+				submission.IsFollower,
+				CurrentStream.GoldenTicketPrice > 0 && submission.RafflePoints >= CurrentStream.GoldenTicketPrice);
 		}
 
-		var rest = query.Skip(11);
+		var rest = query.Skip(numberOfSubToShow);
 		if (rest.Any())
 		{
 			var queueItem = Instantiate(QueueGridItemPrefab, QueueGridPlaceholder);
 			queueItem.GetComponent<QueueGirdItemController>().
-				Setup(true, rest.Sum(q => q.RafflePoints), "And " + rest.Count() + " more submissions", rest.Any(q => IsPriority(q)), rest.Any(q=>q.IsFollower));
+				Setup(true,
+				rest.Sum(q => q.RafflePoints),
+				"And " + rest.Count() + " more submissions",
+				rest.Any(q => IsPriority(q)),
+				rest.Any(q=>q.IsFollower),
+				false);
 		}
 	}
 
@@ -123,8 +140,8 @@ public class QueueManager : MonoBehaviour
 
 		//viewer commands
 		TwitchClient.RegisterCommandHandler("submit", OnSubmitCommand);
-		TwitchClient.RegisterCommandHandler("queue", OnQueueCommand);
-		TwitchClient.RegisterCommandHandler("game", OnGameCommand);
+		TwitchClient.RegisterCommandHandler("queue", cmd => TimedCommand(cmd, 30, OnQueueCommand));
+		TwitchClient.RegisterCommandHandler("game", cmd => TimedCommand(cmd, 15, OnGameCommand));
 		TwitchClient.RegisterCommandHandler("streamergame", OnStreamerGameCommand);
 		TwitchClient.RegisterCommandHandler("join", OnJoinCommand);
 
@@ -136,21 +153,29 @@ public class QueueManager : MonoBehaviour
 		TwitchClient.RegisterCommandHandler("requeue", cmd => ProtectedCommand(cmd, OnRequeueCommand));
 		TwitchClient.RegisterCommandHandler("delete", cmd => ProtectedCommand(cmd, OnDeleteCommand));
 		TwitchClient.RegisterCommandHandler("playmygame", cmd => ProtectedCommand(cmd, OnPayMyGameCommand));
-		TwitchClient.RegisterCommandHandler("raffle", cmd => ProtectedCommand(cmd, OnRaffleCommand)); 
+		TwitchClient.RegisterCommandHandler("raffle", cmd => ProtectedCommand(cmd, OnRaffleCommand));
 		TwitchClient.RegisterCommandHandler("endraffle", cmd => ProtectedCommand(cmd, OnEndRaffleCommand));
+		TwitchClient.RegisterCommandHandler("setopt", cmd => ProtectedCommand(cmd, OnSetOptCommand));
+		TwitchClient.RegisterCommandHandler("joinfor", cmd => ProtectedCommand(cmd, OnJoinForCommand));
 	}
 
 	public void Update()
 	{
-		RaffleRemainingTimeText.gameObject.SetActive(false);
+		RafflePanel.gameObject.SetActive(false);
 		if (RaffleParticipants != null)
 		{
 			RaffleRemainingTime -= Time.deltaTime;
-			RaffleRemainingTimeText.text = "" + (int)Math.Ceiling(RaffleRemainingTime) + " seconds";
-			RaffleRemainingTimeText.gameObject.SetActive(true);
+			RaffleRemainingTimeText.text = "" + (int)Math.Ceiling(RaffleRemainingTime);
+			RafflePanel.gameObject.SetActive(true);
+
+			RaffleRemainingTimeSlider.maxValue = RaffleDefaultDuration;
+			RaffleRemainingTimeSlider.value = RaffleRemainingTime;
+			RaffleRemainingTimeSlider.gameObject.transform.GetChild(1).GetChild(0).GetComponent<Image>().color =
+				RaffleRemainingTimeSliderColors.Evaluate(RaffleRemainingTime / RaffleDefaultDuration);
+
 			if (RaffleRemainingTime <= 0)
 			{
-				RaffleRemainingTimeText.gameObject.SetActive(false);
+				RafflePanel.gameObject.SetActive(false);
 				RaffleRemainingTimeText.text = "Raffle ended!";
 				CloseRaffle();
 				RaffleRemainingTime = 0;
@@ -203,6 +228,73 @@ public class QueueManager : MonoBehaviour
 		RebuildUi();
 	}
 
+
+	private void OnSetOptCommand(ChatCommand cmd)
+	{
+		if (CurrentStream == null || !CurrentStream.IsOngoing)
+		{
+			TwitchClient.SendBotChatMessage("There is no ongoing stream queue open.");
+			return;
+		}
+
+		if (cmd.ArgumentsAsList == null || cmd.ArgumentsAsList.Count != 2)
+		{
+			TwitchClient.SendBotChatMessage("To use the setop command, type \"!setopt [key] [value]\" in chat.");
+			return;
+		}
+
+		var key = cmd.ArgumentsAsList[0];
+		switch (key)
+		{
+			case "gold":
+				var argValue = cmd.ArgumentsAsList[1];
+				int value = -1;
+				int.TryParse(argValue, out value);
+				CurrentStream.GoldenTicketPrice = value;
+				TwitchClient.SendBotChatMessage("Option \"" + key + "\" set to: "+ value);
+				SaveDatabase();
+				RebuildUi();
+				break;
+
+			default:
+				TwitchClient.SendBotChatMessage("Setop: unknown [key] \""+ key + "\"");
+				break;
+		}
+	}
+
+	private void OnJoinForCommand(ChatCommand cmd)
+	{
+		if (CurrentStream == null || !CurrentStream.IsOngoing)
+		{
+			TwitchClient.SendBotChatMessage("There is no ongoing stream queue open.");
+			return;
+		}
+
+		if (cmd.ArgumentsAsList == null || cmd.ArgumentsAsList.Count != 1)
+		{
+			TwitchClient.SendBotChatMessage("To use the joinfor command, type \"!joinfor [username]\" in chat.");
+			return;
+		}
+
+		var chatterTwitchName = cmd.ArgumentsAsList[0];
+		var chatterGame = NextInLine(false, true).FirstOrDefault(s => s.ChatterTwitchName == chatterTwitchName);
+
+		if (chatterGame != null)
+		{
+			//update the status of priority in case it changed since last !submit
+			chatterGame.IsSub = cmd.ChatMessage.IsSubscriber;
+			chatterGame.SubscribedMonthCount = cmd.ChatMessage.SubscribedMonthCount;
+			chatterGame.IsVIP = cmd.ChatMessage.IsVip;
+			chatterGame.IsModerator = cmd.ChatMessage.IsModerator;
+			chatterGame.BitDonatedThisStream = cmd.ChatMessage.Bits;
+			JoinRaffle(chatterGame);
+		}
+		else
+		{
+			TwitchClient.SendBotChatMessage("@" + cmd.ChatMessage.DisplayName + ", I didn't find "+ chatterTwitchName + " submission.");
+		}
+	}
+
 	private void OnJoinCommand(ChatCommand cmd)
 	{
 		if (CurrentStream == null || !CurrentStream.IsOngoing)
@@ -220,38 +312,42 @@ public class QueueManager : MonoBehaviour
 		var chatterTwitchName = cmd.ChatMessage.DisplayName;
 		var chatterGame = NextInLine(false, true).FirstOrDefault(s =>  s.ChatterTwitchName == chatterTwitchName);
 
-		//update the status of priority in case it changed since last !submit
-		chatterGame.IsSub = cmd.ChatMessage.IsSubscriber;
-		chatterGame.SubscribedMonthCount = cmd.ChatMessage.SubscribedMonthCount;
-		chatterGame.IsVIP = cmd.ChatMessage.IsVip;
-		chatterGame.IsModerator = cmd.ChatMessage.IsModerator;
-		chatterGame.BitDonatedThisStream = cmd.ChatMessage.Bits;
-
 		if (chatterGame != null)
 		{
-			if (RaffleParticipants.Contains(chatterGame))
-			{
-				return;
-			}
-
-			chatterGame.IsFollower = TwitchApi.IsFollower(chatterGame.ChatterTwitchName);
-			chatterGame.RafflePoints += 1;
-			if (chatterGame.IsSub || chatterGame.BitDonatedThisStream >= 500 || chatterGame.IsModerator)
-			{
-				chatterGame.RafflePoints += 2;
-			}
-			else if (chatterGame.IsVIP || chatterGame.IsFollower)
-			{
-				chatterGame.RafflePoints += 1;
-			}
-			RaffleParticipants.Add(chatterGame);
-			
-			RebuildUi();
+			//update the status of priority in case it changed since last !submit
+			chatterGame.IsSub = cmd.ChatMessage.IsSubscriber;
+			chatterGame.SubscribedMonthCount = cmd.ChatMessage.SubscribedMonthCount;
+			chatterGame.IsVIP = cmd.ChatMessage.IsVip;
+			chatterGame.IsModerator = cmd.ChatMessage.IsModerator;
+			chatterGame.BitDonatedThisStream = cmd.ChatMessage.Bits;
+			JoinRaffle(chatterGame);
 		}
 		else
 		{
 			TwitchClient.SendBotChatMessage("@" + cmd.ChatMessage.DisplayName + ", I didn't find your submission. You must have use the \"!submit [link]\" command beforehand joining a raffle");
 		}
+	}
+
+	private void JoinRaffle(GameJamSubmission chatterGame)
+	{
+		if (RaffleParticipants.Contains(chatterGame))
+		{
+			return;
+		}
+
+		chatterGame.IsFollower = TwitchApi.IsFollower(chatterGame.ChatterTwitchName);
+		chatterGame.RafflePoints += 1;
+		if (chatterGame.IsSub || chatterGame.BitDonatedThisStream >= 500 || chatterGame.IsModerator)
+		{
+			chatterGame.RafflePoints += 2;
+		}
+		else if (chatterGame.IsVIP || chatterGame.IsFollower)
+		{
+			chatterGame.RafflePoints += 1;
+		}
+		RaffleParticipants.Add(chatterGame);
+
+		RebuildUi();
 	}
 
 	private void OnSubmitCommand(ChatCommand cmd)
@@ -312,7 +408,7 @@ public class QueueManager : MonoBehaviour
 
 		if (GameSubmissions == null || !GameSubmissions.Any())
 		{
-			TwitchClient.SendBotChatMessage("The queue is empty");
+			TwitchClient.SendBotChatMessage("The submission list is empty");
 			return;
 		}
 		List<string> qStr = new List<string>();
@@ -323,7 +419,11 @@ public class QueueManager : MonoBehaviour
 			qStr.Add("[" + game.RafflePoints + "] " + game.ChatterTwitchName);
 		}
 
-		var message = "Top 5 in Raffle Points: " + String.Join(", ", qStr.ToArray()) + ". ";
+		var message = 
+			"We do not use a queue here. We use a raffle system.  " + Environment.NewLine +
+			"Each time you !join a raffle you will win Raffle Points.  " + Environment.NewLine +
+			"The more points you have, the more chance you will have to be selected.  " + Environment.NewLine + Environment.NewLine +
+			"Top 5 in Raffle Points:   " + String.Join(", ", qStr.ToArray()) + ". ";
 
 		var chatterGame = list.FirstOrDefault(s => s.ChatterTwitchName == chatterTwitchName);
 		if (chatterGame != null)
@@ -456,6 +556,12 @@ public class QueueManager : MonoBehaviour
 		int sumOfPoint = RaffleParticipants.Sum(s => s.RafflePoints);
 		int randomPoint = UnityEngine.Random.Range(0, sumOfPoint);
 
+		if (CurrentStream.GoldenTicketPrice > 0 &&
+			RaffleParticipants.Any(subm => subm.RafflePoints >= CurrentStream.GoldenTicketPrice))
+		{
+			RaffleParticipants = RaffleParticipants.Where(subm => subm.RafflePoints >= CurrentStream.GoldenTicketPrice).ToList();
+		}
+
 		var winner = RaffleParticipants[0];
 		foreach (var p in RaffleParticipants.OrderBy(r => UnityEngine.Random.Range(0,1)))
 		{
@@ -553,6 +659,21 @@ public class QueueManager : MonoBehaviour
 	private bool IsPriority(GameJamSubmission game)
 	{
 		return game.IsModerator || game.IsVIP || game.IsSub || game.BitDonatedThisStream >= 500;
+	}
+
+	public Dictionary<string, float> lastCmdInvocation = new Dictionary<string, float>();
+	public void TimedCommand(ChatCommand cmd, float minDelayBetweenInvocation, Action<ChatCommand> action)
+	{
+		var key = cmd.CommandText;
+		if (!lastCmdInvocation.ContainsKey(key) || 
+			lastCmdInvocation[key] + minDelayBetweenInvocation < Time.time)
+		{
+			lastCmdInvocation[key] = Time.time;
+			action(cmd);
+			return;
+		}
+
+		//TwitchClient.SendWhisper(cmd.ChatMessage.DisplayName, "This command can only be called every "+ minDelayBetweenInvocation +" second to avoid spam. It's probably in chat already");
 	}
 
 	public void ProtectedCommand(ChatCommand cmd, Action<ChatCommand> action)

@@ -85,6 +85,11 @@ public class TwitchClient : MonoBehaviour
         PendingMessages.Add(message);
     }
 
+    public void SendWhisper(string user, string message)
+    {
+        client.SendWhisper(user, message);
+    }
+
     private void SendBotChatMessageDirect(string message)
     {
         client.SendMessage(client.JoinedChannels[0], message);

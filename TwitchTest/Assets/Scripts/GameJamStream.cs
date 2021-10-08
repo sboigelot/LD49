@@ -7,4 +7,6 @@ public class GameJamStream
 	public DateTime StartDate { get; set; }
 
 	public bool IsOngoing { get; set; }
+
+	public int GoldenTicketPrice { get; set; }
 }
