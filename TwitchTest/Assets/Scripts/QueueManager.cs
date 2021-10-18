@@ -132,8 +132,8 @@ public class QueueManager : MonoBehaviour
 			foreach (var subm in GameSubmissions)
 			{
 				subm.IsFollower = TwitchApi.IsFollower(subm.ChatterTwitchName);
-				SaveDatabase();
 			}
+			SaveDatabase();
 			RebuildUi();
 		});
 		RebuildUi();
