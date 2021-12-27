@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/TwitchQueue.unity
+- path: Assets/Scenes/TwitchCounter.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
